@@ -1,6 +1,9 @@
 <div class="Box-sc-g0xbh4-0 js-snippet-clipboard-copy-unpositioned DirectoryRichtextContent-module__SharedMarkdownContent--YORdJ" data-hpc="true">
   <article class="markdown-body entry-content container-lg" itemprop="text">
-
+    <h1 dir="auto">docker-symfony 🚀 </h1>
+    <p dir="auto">
+      A Dockerized Symfony application using <strong>PHP 8.4</strong> (via <a href="https://hub.docker.com/_/php" target="_blank" rel="nofollow">php:8.4-alpine </a>) and <strong>Nginx</strong> (via <a href="https://hub.docker.com/_/nginx" target="_blank" rel="nofollow">nginx:alpine </a>). This setup is ideal for local development, testing, and production environments.
+    </p>
    <p dir="auto">
       <a href="https://symfony.com/" rel="nofollow" target="_blank">
          <img src="https://github.com/user-attachments/assets/2156229d-219d-4a22-a907-b7b0824fb184" alt="Docker + Symfony" style="max-width: 100%;" />
@@ -19,6 +22,7 @@
         <li class="text-start "><strong>PHP 8.4</strong>: Full PHP 8.4 support with FPM (FastCGI Process Manager).</li>
         <li class="text-start "><strong>Nginx</strong>: High-performance web server with reverse proxy capabilities.
         </li>
+      <li class="text-start "><strong>Symfony Ready</strong>: Out-of-the-box support for Symfony apps in <code class="codespan cursor-pointer">/var/www/html</code>.</li>
         <li class="text-start "><strong>Easy Configuration</strong>: Customizable Nginx and PHP-FPM settings.</li>
         <li class="text-start "><strong>Ready to Use</strong>: Out-of-the-box support for PHP applications.</li>
     </ul>
@@ -27,7 +31,6 @@
     <h2 dir="auto">📁 Directory Structure </h2>
     <p dir="auto">When using this image, your project directory should look like this: </p>
     <div class="my-2"></div>
-    <div>
         <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
             <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white"></div>
             <div
