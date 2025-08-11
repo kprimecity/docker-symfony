@@ -9,6 +9,14 @@
          <img src="https://github.com/user-attachments/assets/2156229d-219d-4a22-a907-b7b0824fb184" alt="Docker + Symfony" style="max-width: 100%;" />
       </a>
    </p>
+    <p dir="auto">
+      <a href="https://nginx.org/" target="_blank" rel="nofollow">Nginx</a> is a simple webserver with php support. The config files reside in <code>/etc/nginx/conf.d</code> for easy user customization.
+    </p>
+    <p dir="auto">
+      <a href="https://nginx.org/" target="_blank" rel="nofollow">
+        <img src="https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nginx-banner.png" alt="nginx" style="max-width: 100%;">
+      </a>
+    </p>
     <h1 dir="auto">PHP + Nginx Docker Image 🐳 </h1>
     <p dir="auto">A lightweight Docker image combining <strong>PHP 8.4</strong> (via <a
             href="https://hub.docker.com/_/php" target="_blank" rel="nofollow">php:8.4-alpine </a>) and
