@@ -53,27 +53,29 @@
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">📁Supported Architectures</h2>
     <p dir="auto">The architectures supported by this image are:</p>
-    <markdown-accessiblity-table data-catalyst=""><table>
-<thead>
-<tr>
-<th align="center">Architecture</th>
-<th align="center">Available</th>
-<th>Tag</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">x86-64</td>
-<td align="center">✅</td>
-<td>amd64-&lt;version tag&gt;</td>
-</tr>
-<tr>
-<td align="center">arm64</td>
-<td align="center">✅</td>
-<td>arm64v8-&lt;version tag&gt;</td>
-</tr>
-</tbody>
-</table></markdown-accessiblity-table>
+    <markdown-accessiblity-table data-catalyst="">
+      <table>
+        <thead>
+            <tr>
+                <th align="center">Architecture</th>
+                <th align="center">Available</th>
+                <th>Tag</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="center">x86-64</td>
+                <td align="center">✅</td>
+                <td>amd64-&lt;version tag&gt;</td>
+            </tr>
+            <tr>
+                <td align="center">arm64</td>
+                <td align="center">✅</td>
+                <td>arm64v8-&lt;version tag&gt;</td>
+            </tr>
+        </tbody>
+    </table>
+    </markdown-accessiblity-table>
             <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-12"
                 class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
         </div>
@@ -83,11 +85,16 @@
     <h2 dir="auto">🚀 Getting Started </h2>
     <p dir="auto">To help you get started creating a container from this image you can either use docker-compose or the docker cli.</p>
     <h3 dir="auto">1. Clone the Repository xxxxxxxxxx</h3>
+    <ol dir="auto">
+      <li>If not already done, <a href="https://docs.docker.com/compose/install/" rel="nofollow">install Docker Compose</a> (v2.10+)</li>
+      <li>Run <code>docker compose build --pull --no-cache</code> to build fresh images</li>
+      <li>Run <code>docker compose up --wait</code> to set up and start a fresh Symfony project</li>
+      <li>Open <code>https://localhost</code> in your favorite web browser and <a href="https://stackoverflow.com/a/15076602/1352334" rel="nofollow">accept the auto-generated TLS certificate</a></li>
+      <li>Run <code>docker compose down --remove-orphans</code> to stop the Docker containers.</li>
+    </ol>
 
-
-
-
-  <div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto"><pre>---
+  <div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto">
+    <pre>---
 <span class="pl-ent">services</span>:
   <span class="pl-ent">nginx</span>:
     <span class="pl-ent">image</span>: <span class="pl-s">lscr.io/linuxserver/nginx:latest</span>
@@ -103,7 +110,9 @@
     <span class="pl-ent">ports</span>:
       - <span class="pl-c1">80:80</span>
       - <span class="pl-c1">443:443</span>
-    <span class="pl-ent">restart</span>: <span class="pl-s">unless-stopped</span></pre><div class="zeroclipboard-container">
+    <span class="pl-ent">restart</span>: <span class="pl-s">unless-stopped</span>
+  </pre>
+    <div class="zeroclipboard-container">
     <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="---
 services:
   nginx:
@@ -128,192 +137,22 @@ services:
     <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
 </svg>
     </clipboard-copy>
-  </div></div>
-  
-  <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">bash</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-bash rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-17" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 47.2px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">2</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="shell">
-                                <div class="cm-activeLine cm-line"><span class="ͼs">git</span> clone
-                                    https://github.com/your-username/your-repo.git</div>
-                                <div class="cm-line"><span class="ͼs">cd</span> your-repo</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-17"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
+  <pre>
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+</pre>
     <div class="my-2"></div>
     <h3 dir="auto">2. Build the Docker Image </h3>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">bash</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-bash rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-20" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 27.6px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="shell">
-                                <div class="cm-activeLine cm-line">docker build <span class="ͼq">-t</span> php-nginx-app
-                                    .</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 36.4334px; top: 5.30005px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-20"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
+    <pre>docker build -t php-nginx-app .</pre>
     <div class="my-2"></div>
     <h3 dir="auto">3. Run the Container </h3>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">bash</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-bash rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-23" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 27.6px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="shell">
-                                <div class="cm-activeLine cm-line">docker run <span class="ͼq">-d</span> <span
-                                        class="ͼq">-p</span> <span class="ͼu">80</span>:80 <span class="ͼq">-v</span>
-                                    $(pwd)/src:/var/www/html <span class="ͼq">-v</span> $(pwd)/nginx:/etc/nginx/conf.d
-                                    <span class="ͼq">-v</span> $(pwd)/php:/etc/php8.4/fpm www.conf php-nginx-app</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <pre>docker run -d -p 80:80 -v $(pwd)/src:/var/www/html -v $(pwd)/nginx:/etc/nginx/conf.d php-nginx-app</pre>
+              <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
+                  style="z-index: 150; animation-duration: 1200ms;">
+                  <div class="cm-cursor cm-cursor-primary"
+                      style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
+              </div>
+              <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
             <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-23"
                 class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
         </div>
@@ -329,321 +168,12 @@ services:
     <p dir="auto">Place your custom Nginx config files in the <code class="codespan cursor-pointer">nginx/</code>
         directory. For example, <code class="codespan cursor-pointer">default.conf</code>: </p>
     <div class="my-2"></div>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">nginx</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-nginx rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-31" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 360.8px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">99</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">2</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">3</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">4</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">5</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">6</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">7</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">8</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">9</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">10</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">11</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">12</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">13</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">14</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">15</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">16</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">17</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">18</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="nginx">
-                                <div class="cm-activeLine cm-line"><span class="ͼp">server</span> {</div>
-                                <div class="cm-line"> <span class="ͼp">listen</span> 80;</div>
-                                <div class="cm-line"> <span class="ͼp">server_name</span> localhost;</div>
-                                <div class="cm-line"><br></div>
-                                <div class="cm-line"> <span class="ͼp">root</span> /var/www/html;</div>
-                                <div class="cm-line"> <span class="ͼp">index</span> <span class="ͼp">index</span>.<span
-                                        class="ͼu">php index</span>.html;</div>
-                                <div class="cm-line"><br></div>
-                                <div class="cm-line"> <span class="ͼp">location</span> / {</div>
-                                <div class="cm-line"> <span class="ͼp">try_files</span> <span class="ͼu">$uri
-                                    </span>$uri/ /<span class="ͼp">index</span>.<span
-                                        class="ͼu">php?</span>$query_string;</div>
-                                <div class="cm-line"> }</div>
-                                <div class="cm-line"><br></div>
-                                <div class="cm-line"> <span class="ͼp">location</span> <span class="ͼu">~</span> <span
-                                        class="ͼu">\</span>.<span class="ͼu">php$ </span>{</div>
-                                <div class="cm-line"> <span class="ͼp">include</span> fastcgi_params;</div>
-                                <div class="cm-line"> <span class="ͼp">fastcgi_pass</span> unix:/var/run/php8.<span
-                                        class="ͼu">4-fpm</span>.sock;</div>
-                                <div class="cm-line"> <span class="ͼp">fastcgi_param</span> <span
-                                        class="ͼu">SCRIPT_FILENAME </span>$document_root$fastcgi_script_name;</div>
-                                <div class="cm-line"> <span class="ͼp">fastcgi_index</span> <span
-                                        class="ͼp">index</span>.php;</div>
-                                <div class="cm-line"> }</div>
-                                <div class="cm-line">}</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 41.3px; top: 5.3px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-31"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
-    <div class="my-2"></div>
-    <h3 dir="auto">PHP-FPM Configuration </h3>
-    <p dir="auto">Customize PHP settings in the <code class="codespan cursor-pointer">php/www.conf</code> file. Example:
-    </p>
-    <div class="my-2"></div>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">ini</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-ini rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-36" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 262.8px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">99</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">2</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">3</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">4</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">5</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">6</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">7</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">8</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">9</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">10</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">11</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">12</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">13</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="properties">
-                                <div class="cm-activeLine cm-line"><span class="cm-matchingBracket"><span
-                                            class="ͼ11">[</span></span><span class="ͼ11">www</span><span
-                                        class="cm-matchingBracket"><span class="ͼ11">]</span></span></div>
-                                <div class="cm-line"><span class="ͼt">l</span><span class="ͼt">i</span><span
-                                        class="ͼt">s</span><span class="ͼt">t</span><span class="ͼt">e</span><span
-                                        class="ͼt">n</span><span class="ͼt"> </span>= /var/run/php8.4-fpm.sock</div>
-                                <div class="cm-line"><span class="ͼt">u</span><span class="ͼt">s</span><span
-                                        class="ͼt">e</span><span class="ͼt">r</span><span class="ͼt"> </span>= nginx
-                                </div>
-                                <div class="cm-line"><span class="ͼt">g</span><span class="ͼt">r</span><span
-                                        class="ͼt">o</span><span class="ͼt">u</span><span class="ͼt">p</span><span
-                                        class="ͼt"> </span>= nginx</div>
-                                <div class="cm-line"><span class="ͼt">l</span><span class="ͼt">i</span><span
-                                        class="ͼt">s</span><span class="ͼt">t</span><span class="ͼt">e</span><span
-                                        class="ͼt">n</span><span class="ͼt">.</span><span class="ͼt">o</span><span
-                                        class="ͼt">w</span><span class="ͼt">n</span><span class="ͼt">e</span><span
-                                        class="ͼt">r</span><span class="ͼt"> </span>= nginx</div>
-                                <div class="cm-line"><span class="ͼt">l</span><span class="ͼt">i</span><span
-                                        class="ͼt">s</span><span class="ͼt">t</span><span class="ͼt">e</span><span
-                                        class="ͼt">n</span><span class="ͼt">.</span><span class="ͼt">g</span><span
-                                        class="ͼt">r</span><span class="ͼt">o</span><span class="ͼt">u</span><span
-                                        class="ͼt">p</span><span class="ͼt"> </span>= nginx</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">m</span><span class="ͼt">
-                                    </span>= dynamic</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">m</span><span
-                                        class="ͼt">.</span><span class="ͼt">m</span><span class="ͼt">a</span><span
-                                        class="ͼt">x</span><span class="ͼt">_</span><span class="ͼt">c</span><span
-                                        class="ͼt">h</span><span class="ͼt">i</span><span class="ͼt">l</span><span
-                                        class="ͼt">d</span><span class="ͼt">r</span><span class="ͼt">e</span><span
-                                        class="ͼt">n</span><span class="ͼt"> </span>= 5</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">m</span><span
-                                        class="ͼt">.</span><span class="ͼt">s</span><span class="ͼt">t</span><span
-                                        class="ͼt">a</span><span class="ͼt">r</span><span class="ͼt">t</span><span
-                                        class="ͼt">_</span><span class="ͼt">s</span><span class="ͼt">e</span><span
-                                        class="ͼt">r</span><span class="ͼt">v</span><span class="ͼt">e</span><span
-                                        class="ͼt">r</span><span class="ͼt">s</span><span class="ͼt"> </span>= 2</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">m</span><span
-                                        class="ͼt">.</span><span class="ͼt">m</span><span class="ͼt">i</span><span
-                                        class="ͼt">n</span><span class="ͼt">_</span><span class="ͼt">s</span><span
-                                        class="ͼt">p</span><span class="ͼt">a</span><span class="ͼt">r</span><span
-                                        class="ͼt">e</span><span class="ͼt">_</span><span class="ͼt">s</span><span
-                                        class="ͼt">e</span><span class="ͼt">r</span><span class="ͼt">v</span><span
-                                        class="ͼt">e</span><span class="ͼt">r</span><span class="ͼt">s</span><span
-                                        class="ͼt"> </span>= 1</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">m</span><span
-                                        class="ͼt">.</span><span class="ͼt">m</span><span class="ͼt">a</span><span
-                                        class="ͼt">x</span><span class="ͼt">_</span><span class="ͼt">s</span><span
-                                        class="ͼt">p</span><span class="ͼt">a</span><span class="ͼt">r</span><span
-                                        class="ͼt">e</span><span class="ͼt">_</span><span class="ͼt">s</span><span
-                                        class="ͼt">e</span><span class="ͼt">r</span><span class="ͼt">v</span><span
-                                        class="ͼt">e</span><span class="ͼt">r</span><span class="ͼt">s</span><span
-                                        class="ͼt"> </span>= 3</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">h</span><span
-                                        class="ͼt">p</span><span class="ͼt">_</span><span class="ͼt">a</span><span
-                                        class="ͼt">d</span><span class="ͼt">m</span><span class="ͼt">i</span><span
-                                        class="ͼt">n</span><span class="ͼt">_</span><span class="ͼt">v</span><span
-                                        class="ͼt">a</span><span class="ͼt">l</span><span class="ͼt">u</span><span
-                                        class="ͼt">e</span><span class="ͼt">[</span><span class="ͼt">u</span><span
-                                        class="ͼt">p</span><span class="ͼt">l</span><span class="ͼt">o</span><span
-                                        class="ͼt">a</span><span class="ͼt">d</span><span class="ͼt">_</span><span
-                                        class="ͼt">m</span><span class="ͼt">a</span><span class="ͼt">x</span><span
-                                        class="ͼt">_</span><span class="ͼt">f</span><span class="ͼt">i</span><span
-                                        class="ͼt">l</span><span class="ͼt">e</span><span class="ͼt">s</span><span
-                                        class="ͼt">i</span><span class="ͼt">z</span><span class="ͼt">e</span><span
-                                        class="ͼt">]</span><span class="ͼt"> </span>= 20M</div>
-                                <div class="cm-line"><span class="ͼt">p</span><span class="ͼt">h</span><span
-                                        class="ͼt">p</span><span class="ͼt">_</span><span class="ͼt">a</span><span
-                                        class="ͼt">d</span><span class="ͼt">m</span><span class="ͼt">i</span><span
-                                        class="ͼt">n</span><span class="ͼt">_</span><span class="ͼt">v</span><span
-                                        class="ͼt">a</span><span class="ͼt">l</span><span class="ͼt">u</span><span
-                                        class="ͼt">e</span><span class="ͼt">[</span><span class="ͼt">p</span><span
-                                        class="ͼt">o</span><span class="ͼt">s</span><span class="ͼt">t</span><span
-                                        class="ͼt">_</span><span class="ͼt">m</span><span class="ͼt">a</span><span
-                                        class="ͼt">x</span><span class="ͼt">_</span><span class="ͼt">s</span><span
-                                        class="ͼt">i</span><span class="ͼt">z</span><span class="ͼt">e</span><span
-                                        class="ͼt">]</span><span class="ͼt"> </span>= 20M</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 41.3px; top: 5.30002px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-36"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🌐 Usage </h2>
     <p dir="auto">After running the container, access your application in your browser: </p>
     <div class="my-2"></div>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white"></div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language- rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-42" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 27.6px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list">
-                                <div class="cm-activeLine cm-line">http://localhost</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-42"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
+    <pre>http://localhost</pre>
     <div class="my-2"></div>
     <p dir="auto">You should see your PHP application (e.g., <code class="codespan cursor-pointer">index.php</code>)
         rendered by Nginx and PHP-FPM. </p>
@@ -653,134 +183,16 @@ services:
     <h3 dir="auto">Environment Variables </h3>
     <p dir="auto">You can override default settings by setting environment variables: </p>
     <div class="my-2"></div>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">bash</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-bash rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-51" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 27.6px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="shell">
-                                <div class="cm-activeLine cm-line">docker run <span class="ͼq">-e</span> <span
-                                        class="ͼt">PHP_UPLOAD_MAX_FILESIZE</span><span class="ͼv">=</span>50M ...</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-51"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
+    <pre>docker run -e PHP_UPLOAD_MAX_FILESIZE=50M</pre>
     <div class="my-2"></div>
     <h3 dir="auto">Volume Mounts </h3>
     <p dir="auto">Mount your project files and configs: </p>
     <div class="my-2"></div>
-    <div>
-        <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-            <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">bash</div>
-            <div
-                class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                        class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                        <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                            </svg></div>
-                        <div>Collapse</div>
-                    </button> <button
-                        class="save-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Save</button>
-                    <button
-                        class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                </div>
-            </div>
-            <div class="language-bash rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-56" class="h-full w-full text-sm">
-                    <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                        <div class="cm-announced" aria-live="polite"></div>
-                        <div tabindex="-1" class="cm-scroller">
-                            <div class="cm-gutters" aria-hidden="true" style="min-height: 66.8px; position: sticky;">
-                                <div class="cm-gutter cm-lineNumbers">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;">1</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">2</div>
-                                    <div class="cm-gutterElement" style="height: 19.6px;">3</div>
-                                </div>
-                                <div class="cm-gutter cm-foldGutter">
-                                    <div class="cm-gutterElement"
-                                        style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                            title="Unfold line">›</span></div>
-                                    <div class="cm-gutterElement cm-activeLineGutter"
-                                        style="height: 19.6px; margin-top: 4px;"></div>
-                                </div>
-                            </div>
-                            <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                aria-multiline="true" aria-autocomplete="list" data-language="shell">
-                                <div class="cm-activeLine cm-line"><span class="ͼq">-v</span> $(pwd)/src:/var/www/html \
-                                </div>
-                                <div class="cm-line"><span class="ͼq">-v</span> $(pwd)/nginx:/etc/nginx/conf.d \</div>
-                                <div class="cm-line"><span class="ͼq">-v</span> $(pwd)/php:/etc/php8.4/fpm</div>
-                            </div>
-                            <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                style="z-index: 150; animation-duration: 1200ms;">
-                                <div class="cm-cursor cm-cursor-primary"
-                                    style="left: 36.4334px; top: 5.30005px; height: 17px;"></div>
-                            </div>
-                            <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-56"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
+    <pre>
+-v $(pwd)/src:/var/www/html \
+-v $(pwd)/nginx:/etc/nginx/conf.d \
+-v $(pwd)/php:/etc/php8.4/fpm
+</pre>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">📝 Notes </h2>
@@ -794,68 +206,7 @@ services:
                     class="codespan cursor-pointer">pdo</code>, <code class="codespan cursor-pointer">mysql</code>),
                 install them in your Dockerfile: </p>
             <div class="my-2"></div>
-            <div>
-                <div class="relative my-2 flex flex-col rounded-lg" dir="ltr">
-                    <div class="text-text-300 absolute pl-4 py-1.5 text-xs font-medium dark:text-white">Dockerfile</div>
-                    <div
-                        class="sticky top-8 mb-1 py-1 pr-2.5 flex items-center justify-end z-10 text-xs text-black dark:text-white">
-                        <div class="flex items-center gap-0.5 translate-y-[1px]"><button
-                                class="flex gap-1 items-center bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">
-                                <div class="-translate-y-[0.5px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
-                                    </svg></div>
-                                <div>Collapse</div>
-                            </button> <button
-                                class="copy-code-button bg-none border-none bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-md px-1.5 py-0.5">Copy</button>
-                        </div>
-                    </div>
-                    <div class="language-Dockerfile rounded-t-lg -mt-8 rounded-b-lg overflow-hidden">
-                        <div class="pt-7 bg-gray-50 dark:bg-gray-850"></div>
-                        <div id="code-textarea-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-60-1-2"
-                            class="h-full w-full text-sm">
-                            <div class="cm-editor ͼ1 ͼ3 ͼ4 ͼo">
-                                <div class="cm-announced" aria-live="polite"></div>
-                                <div tabindex="-1" class="cm-scroller">
-                                    <div class="cm-gutters" aria-hidden="true"
-                                        style="min-height: 27.6px; position: sticky;">
-                                        <div class="cm-gutter cm-lineNumbers">
-                                            <div class="cm-gutterElement"
-                                                style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
-                                            <div class="cm-gutterElement cm-activeLineGutter"
-                                                style="height: 19.6px; margin-top: 4px;">1</div>
-                                        </div>
-                                        <div class="cm-gutter cm-foldGutter">
-                                            <div class="cm-gutterElement"
-                                                style="height: 0px; visibility: hidden; pointer-events: none;"><span
-                                                    title="Unfold line">›</span></div>
-                                            <div class="cm-gutterElement cm-activeLineGutter"
-                                                style="height: 19.6px; margin-top: 4px;"></div>
-                                        </div>
-                                    </div>
-                                    <div style="tab-size: 4;" spellcheck="false" autocorrect="off" autocapitalize="none"
-                                        translate="no" contenteditable="true" class="cm-content" role="textbox"
-                                        aria-multiline="true" aria-autocomplete="list">
-                                        <div class="cm-activeLine cm-line">RUN apk add --no-cache php8.4-pdo
-                                            php8.4-mysql</div>
-                                    </div>
-                                    <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                                        style="z-index: 150; animation-duration: 1200ms;">
-                                        <div class="cm-cursor cm-cursor-primary"
-                                            style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
-                                    </div>
-                                    <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-60-1-2"
-                        class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden">
-                    </div>
-                </div>
-            </div>
+            <code>RUN apk add --no-cache php8.4-pdo php8.4-mysql</code>
         </li>
     </ul>
     <div class="my-2"></div>
