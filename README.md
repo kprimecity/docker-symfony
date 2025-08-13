@@ -4,6 +4,10 @@
     <p dir="auto">
       A Dockerized Symfony application using <strong>PHP 8.4</strong> (via <a href="https://hub.docker.com/layers/library/php/8.4-fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore" target="_blank" rel="nofollow">php:8.4-alpine </a>) and <strong>Nginx</strong> (via <a href="https://hub.docker.com/_/nginx" target="_blank" rel="nofollow">nginx:alpine </a>). This setup is ideal for local development, testing, and production environments. The container comes with: `bash`, `nano`, `curl` and `compose` packages, so you can use them directly in the container terminal. You can install <a href="https://symfony.com/download" target="_blank" rel="nofollow">Symfony CLI</a> and <a href="https://getcomposer.org/download/" target="_blank" rel="nofollow">Composer</a> in your host machine if you want to install some packages in your project.
     </p>
+    <blockquote dir="auto">
+        <p dir="auto">⚠️ No need to start the <code class="codespan cursor-pointer">Symfony server</code> to access your project.</p>
+    </blockquote>
+    <div class="my-2"></div>
    <p dir="auto">
       <a href="https://symfony.com/" rel="nofollow" target="_blank">
          <img src="https://github.com/user-attachments/assets/2156229d-219d-4a22-a907-b7b0824fb184" alt="Docker + Symfony" style="max-width: 100%;" />
