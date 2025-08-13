@@ -1,5 +1,5 @@
+---
 name: "docker-symfony"
-
 services:
   docker-symfony-nginx:
     build:
@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     image: docker-symfony-nginx:latest
     container_name: docker-symfony-nginx
+    restart: unless-stopped
     environment:
       - PGID=1000
       - PUID=1000
@@ -16,7 +17,7 @@ services:
       - "80:80"
       - "443:443" # Optional
     volumes:
-      - /path/to/your/web/conf:/etc/nginx/conf.d # Mount Nginx config
+      - /path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
     depends_on:
       - docker-symfony-php
     networks:
@@ -28,13 +29,14 @@ services:
       dockerfile: Dockerfile
     image: docker-symfony-php:latest
     container_name: docker-symfony-php
+    restart: unless-stopped
     environment:
       - PGID=1000
       - PUID=1000
     ports:
       - "9000:9000" # Optional
     volumes:
-      - /path/to/your/web/html:/var/www/html # Mount html content
+      - /path/to/web/html:/var/www/html # Mount html content
     networks:
       - docker-symfony-network
 networks:
