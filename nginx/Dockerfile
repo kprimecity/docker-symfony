@@ -11,8 +11,8 @@ RUN apk update && apk upgrade && apk add --no-cache nano bash
 # Remove the default Nginx configuration
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY default.conf /default.conf
-COPY env.conf.template /env.conf.template
+COPY default.conf /etc/nginx/conf.d/default.conf
+COPY env.conf.template /etc/nginx/conf.d/env.conf.template
 
 WORKDIR /etc/nginx
 
