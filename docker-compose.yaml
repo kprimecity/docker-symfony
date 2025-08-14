@@ -14,10 +14,10 @@ services:
       - PHP_SERVICE_NAME=docker-symfony-php
       - NGINX_SERVER_NAME=localhost # Set your host name
     ports:
-      - "8000:80"
+      - "8008:80"
       #- "443:443" # Optional
     volumes:
-      - /path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
+      - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
     depends_on:
       - docker-symfony-php
     networks:
@@ -34,7 +34,7 @@ services:
       - PGID=1000
       - PUID=1000
     volumes:
-      - /path/to/web/html:/var/www/html # Mount html content
+      - ./path/to/web/html:/var/www/html # Mount html content
     networks:
       - docker-symfony-network
 networks:
