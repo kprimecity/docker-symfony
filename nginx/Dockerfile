@@ -17,6 +17,7 @@ COPY default.conf /default.conf
 COPY env.conf.template /env.conf.template
 
 EXPOSE 80
+EXPOSE 443
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
