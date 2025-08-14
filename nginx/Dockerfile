@@ -6,8 +6,6 @@ ARG BUILD_DATE=08/09/2025
 ARG TAG=1.0.0
 LABEL build_version="docker-symfony version:- ${TAG} Build-date:- ${BUILD_DATE}"
 
-WORKDIR /etc/nginx/conf.d
-
 RUN apk update && apk upgrade && apk add --no-cache nano bash
 
 # Remove the default Nginx configuration
@@ -15,6 +13,8 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 COPY default.conf /default.conf
 COPY env.conf.template /env.conf.template
+
+WORKDIR /etc/nginx
 
 EXPOSE 80
 EXPOSE 443
