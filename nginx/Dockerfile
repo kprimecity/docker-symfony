@@ -6,7 +6,7 @@ ARG BUILD_DATE=08/09/2025
 ARG TAG=1.0.0
 LABEL build_version="docker-symfony version:- ${TAG} Build-date:- ${BUILD_DATE}"
 
-WORKDIR /etc/nginx
+WORKDIR /etc/nginx/conf.d
 
 RUN apk update && apk upgrade && apk add --no-cache nano bash
 
