@@ -34,12 +34,12 @@
       </ul>      
     </p>
     <p dir="auto">
-      <h1 dir="auto">
-      <a href="https://nginx.org/" target="_blank" rel="nofollow"><img src="https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nginx-banner.png" alt="nginx" style="max-width: 100%;"></a>
+      <div dir="auto" align="center">
+      <a href="https://nginx.org/" target="_blank" rel="nofollow"><img width="auto" height="72" src="https://github.com/user-attachments/assets/21c79916-815d-485d-9d5a-8ef77d714954" alt="nginx" style="max-width: 100%;"></a>
       <a href="https://www.php.net/" target="_blank" rel="nofollow"><img width="auto" height="72" alt="php" src="https://github.com/user-attachments/assets/630de1e9-a335-4b5c-baf2-950955abf1f9" /></a>
       <a href="https://symfony.com" target="_blank" rel="nofollow"><img width="auto" height="72" alt="symfony" src="https://github.com/user-attachments/assets/976fe8bf-a538-4952-8f85-6783db65ba02" /></a>
       <a href="https://hub.docker.com" target="_blank" rel="nofollow"><img width="auto" height="72" alt="docker" src="https://github.com/user-attachments/assets/505db4dc-69f1-4098-b569-777a3ba57e3c" /></a>
-        </h1>
+        </div>
     </p>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
@@ -99,6 +99,16 @@
 
   <div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto">
     <pre>
+      git clone https://github.com/your-username/your-repo.git
+      cd your-repo
+    </pre>
+    <div class="my-2"></div>
+    <h3 dir="auto">2. Build the Docker Image </h3>
+    <pre>docker build -t php-nginx-app .</pre>
+    <div class="my-2"></div>
+    <h3 dir="auto">3. Run the Container </h3>
+      <pre>docker run -d -p 80:80 -v $(pwd)/src:/var/www/html -v $(pwd)/nginx:/etc/nginx/conf.d php-nginx-app</pre>
+    <pre>
 ---
 name: "docker-symfony"
 services:
@@ -143,25 +153,6 @@ networks:
   docker-symfony-network:
     driver: bridge
     </pre>
-    <pre>
-      git clone https://github.com/your-username/your-repo.git
-      cd your-repo
-    </pre>
-    <div class="my-2"></div>
-    <h3 dir="auto">2. Build the Docker Image </h3>
-    <pre>docker build -t php-nginx-app .</pre>
-    <div class="my-2"></div>
-    <h3 dir="auto">3. Run the Container </h3>
-      <pre>docker run -d -p 80:80 -v $(pwd)/src:/var/www/html -v $(pwd)/nginx:/etc/nginx/conf.d php-nginx-app</pre>
-              <div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true"
-                  style="z-index: 150; animation-duration: 1200ms;">
-                  <div class="cm-cursor cm-cursor-primary"
-                      style="left: 36.4334px; top: 5.29999px; height: 17px;"></div>
-              </div>
-              <div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-23"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
     </div>
     <div class="my-2"></div>
     <blockquote dir="auto">
