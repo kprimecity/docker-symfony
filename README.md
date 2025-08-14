@@ -144,7 +144,7 @@ networks:
         name: docker-symfony_default</pre>
         <div class="my-2"></div>
         <h3 dir="auto">3. Build the Docker Image & Run the Container</h3>
-        <pre>sudo docker compose up -d</pre>
+        <pre>sudo docker compose up --wait -d</pre>
     </div>
     <div class="my-2"></div>
     <blockquote dir="auto">
