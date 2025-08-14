@@ -4,7 +4,7 @@ FROM php:8.4-fpm-alpine
 # Set version labels
 ARG BUILD_DATE=08/09/2025
 ARG VERSION=1.0
-LABEL build_version="Kgdamy version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL build_version="docker-symfony version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
 WORKDIR /var/www/html/
 
