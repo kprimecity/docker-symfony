@@ -80,15 +80,11 @@
         </tbody>
     </table>
     </markdown-accessiblity-table>
-            <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-12"
-                class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
-        </div>
-    </div>
+    <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-12" class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🚀 Getting Started </h2>
     <p dir="auto">To help you get started creating a container from this image you can either use docker-compose or the docker cli.</p>
-    <h3 dir="auto">1. Clone the Repository</h3>
     <ol dir="auto">
       <li>If not already done, <a href="https://docs.docker.com/compose/install/" rel="nofollow">install Docker Compose</a> (v2.10+)</li>
       <li>Run <code>docker compose build --pull --no-cache</code> to build fresh images</li>
@@ -96,20 +92,18 @@
       <li>Open <code>https://localhost</code> in your favorite web browser and <a href="https://stackoverflow.com/a/15076602/1352334" rel="nofollow">accept the auto-generated TLS certificate</a></li>
       <li>Run <code>docker compose down --remove-orphans</code> to stop the Docker containers.</li>
     </ol>
-
-  <div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto">
-    <pre>
-      git clone https://github.com/your-username/your-repo.git
-      cd your-repo
-    </pre>
-    <div class="my-2"></div>
-    <h3 dir="auto">2. Build the Docker Image </h3>
-    <pre>docker build -t php-nginx-app .</pre>
-    <div class="my-2"></div>
-    <h3 dir="auto">3. Run the Container </h3>
-      <pre>docker run -d -p 80:80 -v $(pwd)/src:/var/www/html -v $(pwd)/nginx:/etc/nginx/conf.d php-nginx-app</pre>
-    <pre>
----
+    <h3 dir="auto">1. Clone the Repository</h3>
+    <div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto">
+        <pre>
+git clone https://github.com/kprimecity/docker-symfony.git
+cd docker-symfony</pre>
+        <div class="my-2"></div>
+        <h3 dir="auto">2. Build the Docker Image </h3>
+        <pre>sudo docker compose up -d docker build -t php-nginx-app .</pre>
+        <div class="my-2"></div>
+        <h3 dir="auto">3. Run the Container </h3>
+        <pre>docker run -d -p 80:80 -v $(pwd)/src:/var/www/html -v $(pwd)/nginx:/etc/nginx/conf.d php-nginx-app</pre>
+        <pre>
 name: "docker-symfony"
 services:
   docker-symfony-nginx:
@@ -152,7 +146,7 @@ services:
 networks:
   docker-symfony-network:
     driver: bridge
-    </pre>
+        </pre>
     </div>
     <div class="my-2"></div>
     <blockquote dir="auto">
@@ -240,6 +234,5 @@ networks:
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <p dir="auto">Take care! 💖 </p>
-   
   </article>
 </div>
