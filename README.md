@@ -80,13 +80,13 @@
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🚀 Getting Started </h2>
-    <p dir="auto">To help you get started creating a container from this image you can either use docker-compose or the docker cli.</p>
+    <p dir="auto">To help you get started creating a container from this image you can either use docker-compose or the docker cli. The easy way is to follow this steps:</p>
     <ol dir="auto">
-      <li>If not already done, <a href="https://docs.docker.com/compose/install/" rel="nofollow">install Docker Compose</a> (v2.10+)</li>
-      <li>Run <code>docker compose build --pull --no-cache</code> to build fresh images</li>
-      <li>Run <code>docker compose up --wait</code> to set up and start a fresh Symfony project</li>
-      <li>Open <code>https://localhost</code> in your favorite web browser and <a href="https://stackoverflow.com/a/15076602/1352334" rel="nofollow">accept the auto-generated TLS certificate</a></li>
-      <li>Run <code>docker compose down --remove-orphans</code> to stop the Docker containers.</li>
+      <li>Clone or download the Repository: <code>git clone https://github.com/kprimecity/docker-symfony.git</code>,</li>
+      <li>Modify the docker-compose file according to your needs: <code>sudo nano docker-compose.yaml</code>,</li>
+      <li>Run <code>sudo docker compose up --wait -d</code> to set up and start a fresh Symfony project,</li>
+      <li>Open <code>http://localhost:8008</code> in your favorite web browser to access your project,</li>
+      <li>Replace <code>localhost</code> by your local ip address.</li>
     </ol>
     <h3 dir="auto">1. Clone the Repository</h3>
     <div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto">
@@ -95,8 +95,9 @@ git clone https://github.com/kprimecity/docker-symfony.git
 cd docker-symfony</pre>
         <div class="my-2"></div>
         <h3 dir="auto">2. Set your configuration </h3>
+      <p dir="auto"><code>sudo nano docker-compose.yaml</code></p>
       <blockquote dir="auto">
-        <p dir="auto">⚠️ Edit the docker compose file before run it to ajust your container as you need.</p>
+        <p dir="auto">⚠️ Modify the Docker Compose file located in the folder you just downloaded before running it so you can adjust your container according to your needs.</p>
     </blockquote>
 <pre>
 name: "docker-symfony"
@@ -160,15 +161,17 @@ networks:
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🌐 Usage </h2>
     <p dir="auto">After running the container, access your application in your browser: </p>
-    <div class="my-2"></div>
-    <pre>http://localhost</pre>
-    <div class="my-2"></div>
-    <p dir="auto">You should see your PHP application (e.g., <code class="codespan cursor-pointer">index.php</code>)
-        rendered by Nginx and PHP-FPM. </p>
-     </p>
-    <p></p><blockquote dir="auto">
+    <blockquote dir="auto">
         <p dir="auto">⚠️ No need to start the <code class="codespan cursor-pointer">Symfony server</code> to access your project.</p>
-    </blockquote></p>
+    </blockquote>
+    <div class="my-2"></div>
+    <pre><a href="http://localhost:8008" rel="nofollow" target="_blank">http://localhost:8008</a></pre>
+    <div class="my-2"></div>
+    <p dir="auto">You should see your index page rendered by Nginx and PHP-FPM.</p>
+     </p>
+    <p dir="auto">
+      <img width="2843" height="1550" alt="preview" src="https://github.com/user-attachments/assets/9a317568-27a4-4394-a9f3-4fd1669aef93" />
+    </p>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🧪 Customization </h2>
