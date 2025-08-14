@@ -3,10 +3,6 @@
     <h1 dir="auto">docker-symfony 🚀 </h1>
     <p dir="auto">
       A Dockerized Symfony application using <strong>PHP 8.4</strong> (via <a href="https://hub.docker.com/layers/library/php/8.4-fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore" target="_blank" rel="nofollow">php:8.4-alpine </a>) and <strong>Nginx</strong> (via <a href="https://hub.docker.com/_/nginx" target="_blank" rel="nofollow">nginx:alpine </a>). This setup is ideal for local development, testing, and production environments. The container comes with: `bash`, `nano`, `curl` and `compose` packages, so you can use them directly in the container terminal. You can install <a href="https://symfony.com/download" target="_blank" rel="nofollow">Symfony CLI</a> and <a href="https://getcomposer.org/download/" target="_blank" rel="nofollow">Composer</a> in your host machine if you want to install some packages in your project.
-    </p>
-    <blockquote dir="auto">
-        <p dir="auto">⚠️ No need to start the <code class="codespan cursor-pointer">Symfony server</code> to access your project.</p>
-    </blockquote>
     <div class="my-2"></div>
    <p dir="auto">
       <a href="https://symfony.com/" rel="nofollow" target="_blank">
@@ -98,12 +94,11 @@
 git clone https://github.com/kprimecity/docker-symfony.git
 cd docker-symfony</pre>
         <div class="my-2"></div>
-        <h3 dir="auto">2. Build the Docker Image </h3>
-        <pre>sudo docker compose up -d docker build -t php-nginx-app .</pre>
-        <div class="my-2"></div>
-        <h3 dir="auto">3. Run the Container </h3>
-        <pre>docker run -d -p 80:80 -v $(pwd)/src:/var/www/html -v $(pwd)/nginx:/etc/nginx/conf.d php-nginx-app</pre>
-        <pre>
+        <h3 dir="auto">2. Set your configuration </h3>
+      <blockquote dir="auto">
+        <p dir="auto">⚠️ Edit the docker compose file before run it to ajust your container as you need.</p>
+    </blockquote>
+<pre>
 name: "docker-symfony"
 services:
   docker-symfony-nginx:
@@ -142,14 +137,18 @@ services:
     networks:
       - docker-symfony-network
 networks:
-  docker-symfony-network:
-    driver: bridge
-        </pre>
+    docker-symfony-network:
+        name: docker-symfony-network
+        driver: bridge
+    default:
+        name: docker-symfony_default</pre>
+        <div class="my-2"></div>
+        <h3 dir="auto">3. Build the Docker Image & Run the Container</h3>
+        <pre>sudo docker compose up -d</pre>
     </div>
     <div class="my-2"></div>
     <blockquote dir="auto">
-        <p dir="auto">⚠️ Replace <code class="codespan cursor-pointer">www.conf</code> with your actual PHP-FPM config
-            file if needed. </p>
+        <p dir="auto">⚠️ This command will build all Docker images and run all containers.</p>
     </blockquote>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🛠️ Configuration </h2>
@@ -166,6 +165,10 @@ networks:
     <div class="my-2"></div>
     <p dir="auto">You should see your PHP application (e.g., <code class="codespan cursor-pointer">index.php</code>)
         rendered by Nginx and PHP-FPM. </p>
+     </p>
+    <p></p><blockquote dir="auto">
+        <p dir="auto">⚠️ No need to start the <code class="codespan cursor-pointer">Symfony server</code> to access your project.</p>
+    </blockquote></p>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🧪 Customization </h2>
