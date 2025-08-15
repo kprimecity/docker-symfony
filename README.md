@@ -115,8 +115,8 @@ services:
       - PHP_SERVICE_NAME=docker-symfony-php
       - NGINX_SERVER_NAME=localhost # Set your host name
     ports:
-      - "8000:80"
-      #- "443:443" # Optional
+      - "8008:80"
+      - "8043:443"
     volumes:
       - /path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
     depends_on:
@@ -165,12 +165,12 @@ networks:
         <p dir="auto">⚠️ No need to start the <code class="codespan cursor-pointer">Symfony server</code> to access your project.</p>
     </blockquote>
     <div class="my-2"></div>
-    <pre><a href="http://localhost:8008" rel="nofollow" target="_blank">http://localhost:8008</a></pre>
+    <pre><a href="https://localhost:8008" rel="nofollow" target="_blank">https://localhost:8008</a></pre>
     <div class="my-2"></div>
     <p dir="auto">You should see your index page rendered by Nginx and PHP-FPM.</p>
      </p>
     <p dir="auto">
-      <img width="2843" height="1550" alt="preview" src="https://github.com/user-attachments/assets/9a317568-27a4-4394-a9f3-4fd1669aef93" />
+      <img width="2880" height="1641" alt="preview" src="https://github.com/user-attachments/assets/fa55de05-99d8-4840-81d0-99b2ddbe66cd" />
     </p>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
