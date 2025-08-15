@@ -11,11 +11,10 @@ services:
     environment:
       - PGID=1000
       - PUID=1000
-      - PHP_SERVICE_NAME=docker-symfony-php
-      - NGINX_SERVER_NAME=localhost # Set your host name
+      - PHP_SERVICE_NAME=docker-symfony-php-8008 # Make sure this value is same as the php service name bellow
     ports:
       - "8008:80"
-      #- "443:443" # Optional
+      - "8043:443"
     volumes:
       - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
     depends_on:
@@ -23,7 +22,7 @@ services:
     networks:
       - docker-symfony-network
 
-  docker-symfony-php:
+  docker-symfony-php-8008: # This name MUST be as the PHP_SERVICE_NAME env above
     build:
       context: ./php
       dockerfile: Dockerfile
