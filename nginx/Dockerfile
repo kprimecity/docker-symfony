@@ -13,8 +13,13 @@ RUN apk update && apk upgrade && apk add --no-cache nano bash
 # Remove the default Nginx configuration
 RUN rm /etc/nginx/conf.d/default.conf
 
+# Copy Nginx configuration
 COPY default.conf /default.conf
 COPY env.conf.template /env.conf.template
+
+# Copy symfony cert
+COPY rootCA.pem /rootCA.pem
+COPY  rootCA-key.pem /rootCA-key.pem
 
 EXPOSE 80
 EXPOSE 443
