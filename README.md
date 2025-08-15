@@ -51,7 +51,7 @@
     </ul>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
-    <h2 dir="auto">📁Supported Architectures</h2>
+    <h2 dir="auto">⚙️ Supported Architectures</h2>
     <p dir="auto">The architectures supported by this image are:</p>
     <markdown-accessiblity-table data-catalyst="">
       <table>
@@ -79,13 +79,77 @@
     <div id="plt-canvas-cd9b6cf8-3c82-4a73-97fd-feaac6814eb4-12" class="bg-gray-50 dark:bg-[#202123] dark:text-white max-w-full overflow-x-auto scrollbar-hidden"></div>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
+    <h2 dir="auto">🛠️ Configuration </h2>
+    <div class="my-2"></div>
+    <p dir="auto">This is the description of the Docker Compose file configuration.</p>
+    <div class="my-2"></div>
+    <blockquote dir="auto">
+        <p dir="auto">⚠️ <code>PHP_SERVICE_NAME</code> must be the same as <code>php service name</code>. You must use <code>https://...</code> to access your project.</p>
+    </blockquote>
+    <p dir="auto">You can also put your project under a Reverse Proxy.</p>
+    <div class="my-2"></div>
+    <markdown-accessiblity-table data-catalyst="">
+      <table>
+        <thead>
+            <tr>
+                <th align="center">📌 Ports</th>
+                <th align="center">📚 Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="center"><code>8008</code></td>
+                <td align="center">Bind <code>80</code> port, but you need to use <code>https://xx.xx.xx.xx:8008</code></td>
+            </tr>
+            <tr>
+                <td align="center"><code>8043</code></td>
+                <td align="center">Bind <code>443</code> port, but it's optional</td>
+            </tr>
+            <thead>
+                <tr>
+                    <th align="center">🏷️ Environment</th>
+                    <th align="center">📚 Description</th>
+                </tr>
+            </thead>
+            <tr>
+                <td align="center"><code>PGID</code></td>
+                <td align="center">Process Group ID, Linux command: <code>id</code></td>
+            </tr>
+            <tr>
+                <td align="center"><code>PUID</code></td>
+                <td align="center">Process User  ID, Linux command: <code>id</code></td>
+            </tr>
+            <tr>
+                <td align="center"><code>PHP_SERVICE_NAME</code></td>
+                <td align="center">His value must be the same as the <code>php service name</code> in your Docker Compose file</td>
+            </tr>
+            <thead>
+                <tr>
+                    <th align="center">📁 Volume</th>
+                    <th align="center">📚 Description</th>
+                </tr>
+            </thead>
+            <tr>
+                <td align="center"><code>./path/to/web/conf</code></td>
+                <td align="center">Mount Nginx configuration folder: <code>/etc/nginx/conf.d</code></td>
+            </tr>
+            <tr>
+                <td align="center"><code>./path/to/web/html</code></td>
+                <td align="center">Mount symfony framework folder: <code>/var/www/html</code></td>
+            </tr>
+        </tbody>
+    </table>
+    </markdown-accessiblity-table>
+    <div class="my-2"></div>
+    <hr class="border-gray-100 dark:border-gray-850">
+    <div class="my-2"></div>
     <h2 dir="auto">🚀 Getting Started </h2>
     <p dir="auto">To help you get started creating a container from this image you can either use docker-compose or the docker cli. The easy way is to follow this steps:</p>
     <ol dir="auto">
       <li>Clone or download the Repository: <code>git clone https://github.com/kprimecity/docker-symfony.git</code>,</li>
       <li>Modify the docker-compose file according to your needs: <code>sudo nano docker-compose.yaml</code>,</li>
       <li>Run <code>sudo docker compose up --wait -d</code> to set up and start a fresh Symfony project,</li>
-      <li>Open <code>http://localhost:8008</code> in your favorite web browser to access your project,</li>
+      <li>Open <code>https://localhost:8008</code> in your favorite web browser to access your project,</li>
       <li>Replace <code>localhost</code> by your local ip address.</li>
     </ol>
     <h3 dir="auto">1. Clone the Repository</h3>
@@ -102,39 +166,38 @@ cd docker-symfony</pre>
 <pre>
 name: "docker-symfony"
 services:
-  docker-symfony-nginx:
+  docker-symfony-nginx: # Your Nginx service name
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    image: docker-symfony-nginx:latest
-    container_name: docker-symfony-nginx
+    image: docker-symfony-nginx:latest # Your Docker Image name
+    container_name: docker-symfony-nginx # Your Container name
     restart: unless-stopped
     environment:
       - PGID=1000
       - PUID=1000
-      - PHP_SERVICE_NAME=docker-symfony-php
-      - NGINX_SERVER_NAME=localhost # Set your host name
+      - PHP_SERVICE_NAME=docker-symfony-php # This Value MUST be as the php service name bellow
     ports:
-      - "8008:80"
-      - "8043:443"
+      - "8008:80" # Note that you still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
+      - "8043:443" # Optional
     volumes:
-      - /path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
+      - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
     depends_on:
-      - docker-symfony-php
+      - docker-symfony-php # Same as PHP_SERVICE_NAME Env.
     networks:
       - docker-symfony-network
-  docker-symfony-php:
+  docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME Env.
     build:
       context: ./php
       dockerfile: Dockerfile
-    image: docker-symfony-php:latest
-    container_name: docker-symfony-php
+    image: docker-symfony-php:latest # Your Docker Image name
+    container_name: docker-symfony-php # Your Container name
     restart: unless-stopped
     environment:
       - PGID=1000
       - PUID=1000
     volumes:
-      - /path/to/web/html:/var/www/html # Mount html content
+      - ./path/to/web/html:/var/www/html # Mount html content
     networks:
       - docker-symfony-network
 networks:
@@ -152,13 +215,6 @@ networks:
         <p dir="auto">⚠️ This command will build all Docker images and run all containers.</p>
     </blockquote>
     <hr class="border-gray-100 dark:border-gray-850">
-    <h2 dir="auto">🛠️ Configuration </h2>
-    <h3 dir="auto">Nginx Configuration </h3>
-    <p dir="auto">Place your custom Nginx config files in the <code class="codespan cursor-pointer">nginx/</code>
-        directory. For example, <code class="codespan cursor-pointer">default.conf</code>: </p>
-    <div class="my-2"></div>
-    <div class="my-2"></div>
-    <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">🌐 Usage </h2>
     <p dir="auto">After running the container, access your application in your browser: </p>
     <blockquote dir="auto">
@@ -174,35 +230,13 @@ networks:
     </p>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
-    <h2 dir="auto">🧪 Customization </h2>
-    <h3 dir="auto">Environment Variables </h3>
-    <p dir="auto">You can override default settings by setting environment variables: </p>
     <div class="my-2"></div>
-    <pre>docker run -e PHP_UPLOAD_MAX_FILESIZE=50M</pre>
-    <div class="my-2"></div>
-    <h3 dir="auto">Volume Mounts </h3>
-    <p dir="auto">Mount your project files and configs: </p>
-    <div class="my-2"></div>
-    <pre>
--v $(pwd)/src:/var/www/html \
--v $(pwd)/nginx:/etc/nginx/conf.d \
--v $(pwd)/php:/etc/php8.4/fpm
-</pre>
-    <div class="my-2"></div>
-    <hr class="border-gray-100 dark:border-gray-850">
     <h2 dir="auto">📝 Notes </h2>
     <ul dir="auto" class="">
-        <li class="text-start ">
-            <p><strong>Alpine Linux</strong>: This image uses Alpine's package manager (<code
-                    class="codespan cursor-pointer">apk</code>) for minimal size. </p>
-        </li>
-        <li class="text-start ">
-            <p><strong>PHP Extensions</strong>: If you need additional PHP extensions (e.g., <code
-                    class="codespan cursor-pointer">pdo</code>, <code class="codespan cursor-pointer">mysql</code>),
-                install them in your Dockerfile: </p>
-            <div class="my-2"></div>
-            <code>RUN apk add --no-cache php8.4-pdo php8.4-mysql</code>
-        </li>
+        <li class="text-start "><p>By default <strong>Symfony SSL</strong> is used</p></li>
+        <li class="text-start "><p>You can put your project under a <strong>Reverse Proxy</strong></p></li>
+        <li class="text-start "><p><code>PHP_SERVICE_NAME</code> value must be as <code>php service name</code></p></li>
+        <li class="text-start "><p>Your project <strong>URLs:</strong> <code>https://xx.xx.xx.xx:8008</code> or <code>https://xx.xx.xx.xx:8043</code></p></li>
     </ul>
     <div class="my-2"></div>
     <hr class="border-gray-100 dark:border-gray-850">
