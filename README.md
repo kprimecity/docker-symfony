@@ -65,11 +65,11 @@ You can also put your project under a Reverse Proxy.
 | :----: | :----: |
 | `8008` | Bind `80` port, but you need to use `https://xx.xx.xx.xx:8008` |
 | `8043` | Bind `443` port, but it's optional |
-| 🏷️ Environment | 📚 Description |
+| __🏷️ Environment__ | __📚 Description__ |
 | `PGID` | Process Group ID, Linux command: `id` |
 | `PUID` | Process User ID, Linux command: `id` |
 | `PHP_SERVICE_NAME` |His value must be the same as the `php service name` in your Docker Compose file |
-| 📁 Volume | 📚 Description |
+| __📁 Volume__ | __📚 Description__ |
 | `./path/to/web/conf` | Mount Nginx configuration folder: `/etc/nginx/conf.d` |
 | `./path/to/web/html` | Mount symfony framework folder: `/var/www/html` |
 
