@@ -99,7 +99,9 @@ sudo nano docker-compose.yaml
 ```
 
 >[!NOTE]
->Modify the Docker Compose file located in the folder you just downloaded before running it so you can adjust your container according to your needs.
+>Modify the Docker Compose file located in the folder you just downloaded before running it; so you can adjust your container according to your needs. Build the image using: `sudo docker compose up --wait -d`
+
+Docker compose file:
 
 ```yaml
 name: docker-symfony
@@ -136,7 +138,7 @@ services:
             - PGID=1000
             - PUID=1000
         volumes:
-            - ./path/to/web/html:/var/www/html # Mount html content if you want to manage your project locally
+            - ./path/to/web/html:/var/www/html # Mount html content to manage your project locally
         networks:
             - docker-symfony-network
 networks:
@@ -145,6 +147,30 @@ networks:
         driver: bridge
     default:
         name: docker-symfony_default
+```
+
+Docker Run command:
+
+```yaml
+docker network create -d bridge docker-symfony-network \
+docker network create docker-symfony_default \
+docker run --net docker-symfony-network \
+  --name docker-symfony-nginx \
+  --restart unless-stopped \
+  -e PGID=1000 \
+  -e PUID=1000 \
+  -e PHP_SERVICE_NAME=docker-symfony-php \
+  -p 8008:80 \
+  -p 8043:443 \
+  -v ./path/to/web/conf:/etc/nginx/conf.d \
+  docker-symfony-nginx:latest
+  docker run --net docker-symfony-network \
+  --name docker-symfony-php \
+  --restart unless-stopped \
+  -e PGID=1000 \
+  -e PUID=1000 \
+  -v ./path/to/web/html:/var/www/html \
+  docker-symfony-php:latest
 ```
 
 ### 3. Build the Docker Image & Run the Container
