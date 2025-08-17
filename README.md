@@ -110,7 +110,7 @@ services:
         build:
             context: ./nginx
             dockerfile: Dockerfile
-        image: docker-symfony-nginx:latest # Your Docker Image name
+        image: kprimecity/docker-symfony-nginx:latest # Your Docker Image name
         container_name: docker-symfony-nginx # Your Container name
         restart: unless-stopped
         environment:
@@ -131,7 +131,7 @@ services:
         build:
             context: ./php
             dockerfile: Dockerfile
-        image: docker-symfony-php:latest # Your Docker Image name
+        image: kprimecity/docker-symfony-php:latest # Your Docker Image name
         container_name: docker-symfony-php # Your Container name
         restart: unless-stopped
         environment:
