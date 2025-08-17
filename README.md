@@ -7,7 +7,7 @@ A Dockerized Symfony application using PHP 8.4 (via [php:8.4-alpine](https://hub
 [![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=kprimecity.io&message=GitHub%20Package&logo=github)](https://github.com/kprimecity/docker-symfony/packages)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE)
 
-<img width="1012" height="316" alt="docker-symfony" src="https://github.com/user-attachments/assets/c52e6e0c-6097-4f8e-9fb2-57b439e6f5c7" />
+<img width="100%" height="auto" alt="docker-symfony" src="https://github.com/user-attachments/assets/c52e6e0c-6097-4f8e-9fb2-57b439e6f5c7" />
 
 ___
 
@@ -198,7 +198,7 @@ https://localhost:8008
 
 You should see your index page rendered by Nginx and PHP-FPM.
 
-<img width="2880" height="1641" alt="preview" src="https://github.com/user-attachments/assets/8825d37e-6847-423b-9f23-f5775a2c33c4" />
+<img width="100%" height="auto" alt="preview" src="https://github.com/user-attachments/assets/8825d37e-6847-423b-9f23-f5775a2c33c4" />
 
 ___
 
