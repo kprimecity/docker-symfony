@@ -5,6 +5,7 @@ A Dockerized Symfony application using PHP 8.4 (via [php:8.4-alpine](https://hub
 [![GitHub Stars](https://img.shields.io/github/stars/kprimecity/docker-symfony.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/kprimecity/docker-symfony)
 [![GitHub Release](https://img.shields.io/github/release/kprimecity/docker-symfony.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/kprimecity/docker-symfony/releases)
 [![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=kprimecity.io&message=GitHub%20Package&logo=github)](https://github.com/kprimecity/docker-symfony/packages)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE)
 
 <img width="1012" height="316" alt="docker-symfony" src="https://github.com/user-attachments/assets/c52e6e0c-6097-4f8e-9fb2-57b439e6f5c7" />
 
