@@ -102,42 +102,43 @@ sudo nano docker-compose.yaml
 >Modify the Docker Compose file located in the folder you just downloaded before running it so you can adjust your container according to your needs.
 
 ```yaml
-name: "docker-symfony"
+name: docker-symfony
 services:
-  docker-symfony-nginx: # Your Nginx service name
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    image: docker-symfony-nginx:latest # Your Docker Image name
-    container_name: docker-symfony-nginx # Your Container name
-    restart: unless-stopped
-    environment:
-      - PGID=1000
-      - PUID=1000
-      - PHP_SERVICE_NAME=docker-symfony-php # This Value MUST be as the php service name bellow
-    ports:
-      - "8008:80" # Note that you still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
-      - "8043:443" # Optional
-    volumes:
-      - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
-    depends_on:
-      - docker-symfony-php # Same as PHP_SERVICE_NAME Env.
-    networks:
-      - docker-symfony-network
-  docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME Env.
-    build:
-      context: ./php
-      dockerfile: Dockerfile
-    image: docker-symfony-php:latest # Your Docker Image name
-    container_name: docker-symfony-php # Your Container name
-    restart: unless-stopped
-    environment:
-      - PGID=1000
-      - PUID=1000
-    volumes:
-      - ./path/to/web/html:/var/www/html # Mount html content
-    networks:
-      - docker-symfony-network
+    docker-symfony-nginx: # Your Nginx service name
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        image: docker-symfony-nginx:latest # Your Docker Image name
+        container_name: docker-symfony-nginx # Your Container name
+        restart: unless-stopped
+        environment:
+            - PGID=1000
+            - PUID=1000
+            - PHP_SERVICE_NAME=docker-symfony-php # This Value MUST be as the php service name bellow
+        ports:
+            - 8008:80 # Note that you still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
+            - 8043:443 # Optional
+        volumes:
+            - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
+        depends_on:
+            - docker-symfony-php # Same as PHP_SERVICE_NAME environment
+        networks:
+            - docker-symfony-network
+
+    docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME environment
+        build:
+            context: ./php
+            dockerfile: Dockerfile
+        image: docker-symfony-php:latest # Your Docker Image name
+        container_name: docker-symfony-php # Your Container name
+        restart: unless-stopped
+        environment:
+            - PGID=1000
+            - PUID=1000
+        volumes:
+            - ./path/to/web/html:/var/www/html # Mount html content if you want to manage your project locally
+        networks:
+            - docker-symfony-network
 networks:
     docker-symfony-network:
         name: docker-symfony-network
