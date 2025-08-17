@@ -3,8 +3,9 @@ FROM nginx:alpine
 
 # Set version labels
 ARG BUILD_DATE=08/09/2025
-ARG TAG=1.0.0
-LABEL build_version="docker-symfony version:- ${TAG} Build-date:- ${BUILD_DATE}"
+ARG VERSION=1.0.0
+LABEL build_version="docker-symfony version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="kprimecity"
 
 WORKDIR /etc/nginx
 
