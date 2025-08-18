@@ -123,7 +123,7 @@ services:
             - PUID=1000
             - PHP_SERVICE_NAME=docker-symfony-php # This Value MUST be as the php service name bellow
         ports:
-            - 8008:80 # Note that you still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
+            - 8008:80 # You still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
             - 8043:443 # Optional
         volumes:
             - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
