@@ -5,9 +5,12 @@ A Dockerized Symfony application using PHP 8.4 (via [php:8.4-alpine](https://hub
 [![GitHub Stars](https://img.shields.io/github/stars/kprimecity/docker-symfony.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/kprimecity/docker-symfony)
 [![GitHub Release](https://img.shields.io/github/release/kprimecity/docker-symfony.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/kprimecity/docker-symfony/releases)
 [![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=kprimecity.io&message=GitHub%20Package&logo=github)](https://github.com/kprimecity/docker-symfony/packages)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/kprimecity/docker-symfony-nginx.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/kprimecity/docker-symfony-nginx)
+[![Docker Stars](https://img.shields.io/docker/stars/kprimecity/docker-symfony-nginx.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/kprimecity/docker-symfony-nginx)
 
-<img width="100%" height="auto" alt="docker-symfony" src="https://github.com/user-attachments/assets/c52e6e0c-6097-4f8e-9fb2-57b439e6f5c7" />
+<div align="center" width="100%">
+    <img width="100%" height="auto" alt="docker-symfony" src="https://github.com/user-attachments/assets/c52e6e0c-6097-4f8e-9fb2-57b439e6f5c7" />
+</div>
 
 ___
 
@@ -86,8 +89,9 @@ To help you get started creating a container from this image you can either use 
 2. Go in the folder: `cd docker-symfony`
 3. Modify the docker-compose file according to your needs: `sudo nano docker-compose.yaml`,
 4. Run `sudo docker compose up --wait -d` to set up and start a fresh Symfony project,
-5. Open `https://localhost:8008` in your favorite web browser to access your project,
-6. Replace `localhost` by your local ip address.
+5. Wait a few minutes for the Symfony framework to be downloaded, you can check the `php container log` to see the progress,
+6. Open `https://localhost:8008` in your favorite web browser to access your project,
+7. Replace `localhost` by your local ip address.
 
 ### 1. Clone the Repository
 
@@ -103,7 +107,7 @@ sudo nano docker-compose.yaml
 ```
 
 >[!NOTE]
->Modify the Docker Compose file located in the folder you just downloaded before running it; so you can adjust your container according to your needs. Build the image using: `sudo docker compose up --wait -d`
+>Modify the Docker Compose file before running it; so you can adjust your containers (Nginx and PHP) according to your needs. Run the containers using: `sudo docker compose up --wait -d`. Wait a few minutes for the Symfony framework to be downloaded.
 
 Docker compose file:
 
@@ -128,7 +132,7 @@ services:
         networks:
             - docker-symfony-network
 
-    docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME environment
+    docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME environment ABOVE
         image: kprimecity/docker-symfony-php:latest
         container_name: docker-symfony-php # Your Container name
         restart: unless-stopped
@@ -186,25 +190,31 @@ ___
 
 After running the container, access your application in your browser:
 
->[!NOTE]
-> No need to start the `Symfony server` to access your project.
-
 ```
 https://localhost:8008
 ```
 
 You should see your index page rendered by Nginx and PHP-FPM.
 
-<img width="100%" height="auto" alt="preview" src="https://github.com/user-attachments/assets/8825d37e-6847-423b-9f23-f5775a2c33c4" />
+<div align="center" width="100%">
+    <img width="100%" height="auto" alt="preview" src="https://github.com/user-attachments/assets/8825d37e-6847-423b-9f23-f5775a2c33c4" />
+</div>
+
+<br/>
+
+>[!NOTE]
+> No need to start the `Symfony server` to access your project.
 
 ___
 
 # 📝 Notes
 
-* By default Symfony SSL is used
-* You can put your project under a Reverse Proxy
-* `PHP_SERVICE_NAME` value must be as `php service name`
-* Your project URLs: `https://xx.xx.xx.xx:8008` or `https://xx.xx.xx.xx:8043`
+* By default, Symfony SSL is used just in development; never use it in production.
+* For more security propose or in production mode:
+  * Put your project under a Reverse Proxy, using [Nginx Proxy Manager](https://nginxproxymanager.com/guide/)
+  * Or change the SSL source in the `nginx server configuration` to make Nginx use your own SSL.
+* The Docker Compose Environment (`PHP_SERVICE_NAME`) value must be as the `php container service name`.
+* Your project URLs: `https://xx.xx.xx.xx:8008` or `https://xx.xx.xx.xx:8043`: https only.
 
 # 🤝 Contributing
 
@@ -221,12 +231,14 @@ ___
 
 This project is licensed under the [GPL-3.0 License](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE). See the [LICENSE](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE) file for details.
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE)
+
 ___
 
 # 🔎 Acknowledgments
 
-* [php:8.4-alpine](https://hub.docker.com/layers/library/php/8.4-fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore)
-* [nginx:alpine](https://hub.docker.com/_/nginx)
+* [PHP:8.4-alpine](https://hub.docker.com/layers/library/php/8.4-fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore)
+* [Nginx:alpine](https://hub.docker.com/_/nginx)
 * [Alpine Linux docker base image](https://hub.docker.com/_/alpine)
 * [Symfony community](https://symfony.com/community)
 
