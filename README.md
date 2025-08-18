@@ -111,10 +111,7 @@ Docker compose file:
 name: docker-symfony
 services:
     docker-symfony-nginx: # Your Nginx service name
-        build:
-            context: ./nginx
-            dockerfile: Dockerfile
-        image: kprimecity/docker-symfony-nginx:latest # Your Docker Image name
+        image: kprimecity/docker-symfony-nginx:latest
         container_name: docker-symfony-nginx # Your Container name
         restart: unless-stopped
         environment:
@@ -132,10 +129,7 @@ services:
             - docker-symfony-network
 
     docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME environment
-        build:
-            context: ./php
-            dockerfile: Dockerfile
-        image: kprimecity/docker-symfony-php:latest # Your Docker Image name
+        image: kprimecity/docker-symfony-php:latest
         container_name: docker-symfony-php # Your Container name
         restart: unless-stopped
         environment:
