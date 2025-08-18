@@ -20,6 +20,8 @@ A lightweight Docker image combining PHP 8.4 ([php:8.4-alpine](https://hub.docke
 * [Symfony](https://symfony.com/doc/current/setup.html) is a web application framework that makes it easy to develop robust and scalable web applications. The index file of your project resides in `/var/www/html/public`
 * [Alpine Linux](https://hub.docker.com/_/alpine) is a lightweight and security-focused Linux distribution known for its minimal size. This small footprint makes the Alpine image a popular choice for creating compact and efficient Docker containers.
 
+<br/>
+
 <div align="center" width="100%">
 
 [<img width="auto" height="72" alt="nginx" align="center" src="https://github.com/user-attachments/assets/76031613-001a-41ec-95b6-dd93f6b2c81a" />](https://nginx.org/)
