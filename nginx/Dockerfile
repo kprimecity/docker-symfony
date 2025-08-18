@@ -3,7 +3,7 @@ FROM nginx:alpine
 
 # Set version labels
 ARG BUILD_DATE=08/09/2025
-ARG VERSION=1.0.0
+ARG VERSION=v1.0.0
 LABEL build_version="docker-symfony version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="kprimecity"
 
