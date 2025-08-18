@@ -83,10 +83,11 @@ ___
 To help you get started creating a container from this image you can either use docker-compose or the docker cli. The easy way is to follow this steps:
 
 1. Clone or download the Repository: `git clone https://github.com/kprimecity/docker-symfony.git`,
-2. Modify the docker-compose file according to your needs: `sudo nano docker-compose.yaml`,
-3. Run `sudo docker compose up --wait -d` to set up and start a fresh Symfony project,
-4. Open `https://localhost:8008` in your favorite web browser to access your project,
-5. Replace `localhost` by your local ip address.
+2. Go in the folder: `cd docker-symfony`
+3. Modify the docker-compose file according to your needs: `sudo nano docker-compose.yaml`,
+4. Run `sudo docker compose up --wait -d` to set up and start a fresh Symfony project,
+5. Open `https://localhost:8008` in your favorite web browser to access your project,
+6. Replace `localhost` by your local ip address.
 
 ### 1. Clone the Repository
 
