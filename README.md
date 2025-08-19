@@ -157,22 +157,22 @@ Docker Run command:
 docker network create -d bridge docker-symfony-network \
 docker network create docker-symfony_default \
 docker run --net docker-symfony-network \
-  --name docker-symfony-nginx \
-  --restart unless-stopped \
+  --name docker-symfony-nginx-8008 \
+  --restart unless-stopped
   -e PGID=1000 \
   -e PUID=1000 \
-  -e PHP_SERVICE_NAME=docker-symfony-php \
+  -e PHP_SERVICE_NAME=php-8008 \
   -p 8008:80 \
   -p 8043:443 \
-  -v ./path/to/web/conf:/etc/nginx/conf.d \
-  docker-symfony-nginx:latest
-  docker run --net docker-symfony-network \
-  --name docker-symfony-php \
+  -v ./path/to/web/conf/8008:/etc/nginx/conf.d \
+  kprimecity/docker-symfony-nginx:latest
+docker run --net docker-symfony-network \
+  --name docker-symfony-php-8008 \
   --restart unless-stopped \
   -e PGID=1000 \
   -e PUID=1000 \
   -v ./path/to/web/html:/var/www/html \
-  docker-symfony-php:latest
+  kprimecity/docker-symfony-php:latest
 ```
 
 ### 3. Build the Docker Image & Run the Container
