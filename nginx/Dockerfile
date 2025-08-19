@@ -5,7 +5,7 @@ FROM nginx:alpine
 ARG BUILD_DATE=08/09/2025
 ARG VERSION=v1.0.0
 LABEL build_version="docker-symfony version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL org.opencontainers.image.description "Run Symfony framework using Nginx server."
+LABEL org.opencontainers.image.description="Run Symfony framework using Nginx server."
 LABEL maintainer="kprimecity"
 
 WORKDIR /etc/nginx
