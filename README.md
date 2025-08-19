@@ -212,7 +212,7 @@ ___
 
 * By default, Symfony SSL is used just in development; never use it in production.
 * For more security propose or in production mode:
-  * Put your project under a Reverse Proxy, using [Nginx Proxy Manager](https://nginxproxymanager.com/guide/)
+  * Put your project under a Reverse Proxy, using [Nginx Proxy Manager](https://nginxproxymanager.com/guide/),
   * Or change the SSL source in the `nginx server configuration` to make Nginx use your own SSL.
 * The Docker Compose Environment (`PHP_SERVICE_NAME`) value must be as the `php container service name`.
 * Your project URLs: `https://xx.xx.xx.xx:8008` or `https://xx.xx.xx.xx:8043`: https only.
