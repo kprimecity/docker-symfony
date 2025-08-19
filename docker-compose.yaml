@@ -9,8 +9,8 @@ services:
             - PUID=1000
             - PHP_SERVICE_NAME=php-8008 # This Value MUST be as the php service name bellow
         ports:
-            - 8008:80 # You still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
-            - 8043:443 # Optional
+            - 8008:80 # Bind Port 80: Symfony Web Debugging Toolbar Not Loading
+            - 8043:443 # Binding port 443: Symfony web debugging toolbar loads correctly
         volumes:
             - ./path/to/web/conf/8008:/etc/nginx/conf.d # Mount Nginx config
         depends_on:
