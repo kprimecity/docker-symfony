@@ -165,7 +165,7 @@ docker run --net docker-symfony-network \
   -p 8008:80 \
   -p 8043:443 \
   -v ./path/to/web/conf/8008:/etc/nginx/conf.d \
-  kprimecity/docker-symfony-nginx:latest
+  kprimecity/docker-symfony-nginx:latest \
 docker run --net docker-symfony-network \
   --name docker-symfony-php-8008 \
   --restart unless-stopped \
