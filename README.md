@@ -63,14 +63,14 @@ ___
 This is the description of the Docker Compose file configuration.
 
 >[!NOTE]
->`PHP_SERVICE_NAME` must be the same as` php service name`. You must use `https://...` to access your project.
+>`PHP_SERVICE_NAME` must be the same as` php service name`. You must use `https://xx.xx.xx.xx:8043` to access your project if you need the Symfony Web Debug Toolbar.
 
-You can also put your project under a Reverse Proxy.
+You can also put your project (`The Port you used to Bind to Port 80`) under a Reverse Proxy, you can use [Nginx Proxy Manager](https://nginxproxymanager.com/guide/).
 
 | 📌 Ports | 📚 Description |
 | :----: | :----: |
-| `8008` | Bind `80` port, but you need to use `https://xx.xx.xx.xx:8008` |
-| `8043` | Bind `443` port, but it's optional |
+| `8008` | Bind Port `80`: Symfony Web Debug Toolbar `Not Loading` |
+| `8043` | Bind Port `443`: Symfony Web Debug Toolbar `loads correctly` |
 | __🏷️ Environment__ | __📚 Description__ |
 | `PGID` | Process Group ID, Linux command: `id` |
 | `PUID` | Process User ID, Linux command: `id` |
@@ -90,7 +90,7 @@ To help you get started creating a container from this image you can either use 
 3. Modify the docker-compose file according to your needs: `sudo nano docker-compose.yaml`,
 4. Run `sudo docker compose up --wait -d` to set up and start a fresh Symfony project,
 5. Wait a few minutes for the Symfony framework to be downloaded, you can check the `php container log` to see the progress,
-6. Open `https://localhost:8008` in your favorite web browser to access your project,
+6. Open `https://localhost:8043` in your favorite web browser to access your project,
 7. Replace `localhost` by your local ip address.
 
 ### 1. Clone the Repository
@@ -123,12 +123,12 @@ services:
             - PUID=1000
             - PHP_SERVICE_NAME=php-8008 # This Value MUST be as the php service name bellow
         ports:
-            - 8008:80 # Bind Port 80: Symfony Web Debugging Toolbar Not Loading
-            - 8043:443 # Binding port 443: Symfony web debugging toolbar loads correctly
+            - 8008:80 # Bind Port 80: Symfony Web Debug Toolbar Not Loading
+            - 8043:443 # Bind Port 443: Symfony Web Debug Toolbar loads Correctly
         volumes:
             - ./path/to/web/conf/8008:/etc/nginx/conf.d # Mount Nginx config
         depends_on:
-            - php-8008 # Same as PHP_SERVICE_NAME environment
+            - php-8008 # Same as PHP_SERVICE_NAME environment and php service name bellow
         networks:
             - docker-symfony-network
 
@@ -192,13 +192,13 @@ ___
 After running the container, access your application in your browser:
 
 ```
-https://localhost:8008
+https://localhost:8043
 ```
 
-You should see your index page rendered by Nginx and PHP-FPM.
+You should see your index page rendered by the docker-symfony Nginx and PHP-FPM containers.
 
 <div align="center" width="100%">
-    <img width="100%" height="auto" alt="preview" src="https://github.com/user-attachments/assets/8825d37e-6847-423b-9f23-f5775a2c33c4" />
+    <img width="100%" height="auto" alt="preview" src="https://github.com/user-attachments/assets/ebcbc084-6769-4a7a-865d-e4f2d8df1ab1" />
 </div>
 
 <br/>
@@ -212,10 +212,10 @@ ___
 
 * By default, Symfony SSL is used just in development; never use it in production.
 * For more security propose or in production mode:
-  * Put your project under a Reverse Proxy, using [Nginx Proxy Manager](https://nginxproxymanager.com/guide/),
+  * Put your project (`The Port you used to Bind to Port 80`) under a Reverse Proxy, you can use [Nginx Proxy Manager](https://nginxproxymanager.com/guide/),
   * Or change the SSL source in the `nginx server configuration` to make Nginx use your own SSL.
 * The Docker Compose Environment (`PHP_SERVICE_NAME`) value must be as the `php container service name`.
-* Your project URLs: `https://xx.xx.xx.xx:8008` or `https://xx.xx.xx.xx:8043`: https only.
+* Your project URLs: `http://xx.xx.xx.xx:8008` (`No Symfony Web Debug Toolbar`) or `https://xx.xx.xx.xx:8043` (`With Symfony Web Debug Toolbar`).
 
 # 🤝 Contributing
 
