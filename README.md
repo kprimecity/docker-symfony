@@ -115,7 +115,7 @@ Docker compose file:
 name: docker-symfony
 services:
     nginx-8008: # Your Nginx service name
-        image: kprimecity/docker-symfony-nginx:latest
+        image: ghcr.io/kprimecity/docker-symfony-nginx:latest
         container_name: docker-symfony-nginx-8008 # Your Container name
         restart: unless-stopped
         environment:
@@ -133,7 +133,7 @@ services:
             - docker-symfony-network
 
     php-8008: # PHP service name: Same as PHP_SERVICE_NAME environment ABOVE
-        image: kprimecity/docker-symfony-php:latest
+        image: ghcr.io/kprimecity/docker-symfony-php:latest
         container_name: docker-symfony-php-8008 # Your Container name
         restart: unless-stopped
         environment:
@@ -166,14 +166,14 @@ docker run --net docker-symfony-network \
   -p 8008:80 \
   -p 8043:443 \
   -v ./path/to/web/conf/8008:/etc/nginx/conf.d \
-  kprimecity/docker-symfony-nginx:latest \
+  ghcr.io/kprimecity/docker-symfony-nginx:latest \
 docker run --net docker-symfony-network \
   --name docker-symfony-php-8008 \
   --restart unless-stopped \
   -e PGID=1000 \
   -e PUID=1000 \
   -v ./path/to/web/html:/var/www/html \
-  kprimecity/docker-symfony-php:latest
+  ghcr.io/kprimecity/docker-symfony-php:latest
 ```
 
 ### 3. Build the Docker Image & Run the Container
