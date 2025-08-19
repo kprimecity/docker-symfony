@@ -143,6 +143,7 @@ services:
             - ./path/to/web/html:/var/www/html # Mount html content to manage your project locally
         networks:
             - docker-symfony-network
+
 networks:
     docker-symfony-network:
         name: docker-symfony-network
