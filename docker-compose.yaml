@@ -1,32 +1,32 @@
 name: docker-symfony
 services:
-    docker-symfony-nginx: # Your Nginx service name
+    nginx-8008: # Your Nginx service name
         image: kprimecity/docker-symfony-nginx:latest
-        container_name: docker-symfony-nginx # Your Container name
+        container_name: docker-symfony-nginx-8008 # Your Container name
         restart: unless-stopped
         environment:
             - PGID=1000
             - PUID=1000
-            - PHP_SERVICE_NAME=docker-symfony-php # This Value MUST be as the php service name bellow
+            - PHP_SERVICE_NAME=php-8008 # This Value MUST be as the php service name bellow
         ports:
-            - 8008:80 # Note that you still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
+            - 8008:80 # You still need to use https://xx.xx.xx.xx:8008 even if you bind 80 port
             - 8043:443 # Optional
         volumes:
-            - ./path/to/web/conf:/etc/nginx/conf.d # Mount Nginx config
+            - ./path/to/web/conf/8008:/etc/nginx/conf.d # Mount Nginx config
         depends_on:
-            - docker-symfony-php # Same as PHP_SERVICE_NAME environment
+            - php-8008 # Same as PHP_SERVICE_NAME environment
         networks:
             - docker-symfony-network
 
-    docker-symfony-php: # PHP service name: Same as PHP_SERVICE_NAME environment ABOVE
+    php-8008: # PHP service name: Same as PHP_SERVICE_NAME environment ABOVE
         image: kprimecity/docker-symfony-php:latest
-        container_name: docker-symfony-php # Your Container name
+        container_name: docker-symfony-php-8008 # Your Container name
         restart: unless-stopped
         environment:
             - PGID=1000
             - PUID=1000
         volumes:
-            - ./path/to/web/html:/var/www/html # Mount html content if you want to manage your project locally
+            - ./path/to/web/html:/var/www/html # Mount html content to manage your project locally
         networks:
             - docker-symfony-network
 networks:
