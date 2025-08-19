@@ -5,6 +5,7 @@ FROM php:8.4-fpm-alpine
 ARG BUILD_DATE=08/09/2025
 ARG VERSION=v1.0.0
 LABEL build_version="docker-symfony version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL org.opencontainers.image.description "Run Symfony framework using PHP:8.4-fpm."
 LABEL maintainer="kprimecity"
 
 WORKDIR /var/www/html/
