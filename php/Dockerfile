@@ -18,6 +18,7 @@ RUN apk update && apk upgrade && \
     php84-opcache \
     php84-gd \
     php84-xml \
+    php84-intl \
     php84-mbstring \
     php84-zip
 
