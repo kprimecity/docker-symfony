@@ -1,32 +1,15 @@
 name: docker-symfony
 services:
-    nginx-8008: # Your Nginx service name
-        image: ghcr.io/kprimecity/docker-symfony-nginx:latest
-        container_name: docker-symfony-nginx-8008 # Your Container name
-        restart: unless-stopped
-        environment:
-            - PGID=1000
-            - PUID=1000
-            - PHP_SERVICE_NAME=php-8008 # This Value MUST be as the php service name bellow
+    symfony-8008: # service name
+        image: kprimecity/docker-symfony:latest
+        container_name: symfony-8008 # Your Container name
+        restart: always
         ports:
-            - 8008:80 # Bind Port 80: Symfony Web Debugging Toolbar Not Loading
-            - 8043:443 # Binding port 443: Symfony web debugging toolbar loads correctly
+            - 8008:80 # http://xx.xx.xx.xx:8008
+            - 8043:443 # Optional: https://xx.xx.xx.xx:8043
         volumes:
-            - ./path/to/web/conf/8008:/etc/nginx/conf.d # Mount Nginx config
-        depends_on:
-            - php-8008 # Same as PHP_SERVICE_NAME environment
-        networks:
-            - docker-symfony-network
-
-    php-8008: # PHP service name: Same as PHP_SERVICE_NAME environment ABOVE
-        image: ghcr.io/kprimecity/docker-symfony-php:latest
-        container_name: docker-symfony-php-8008 # Your Container name
-        restart: unless-stopped
-        environment:
-            - PGID=1000
-            - PUID=1000
-        volumes:
-            - ./path/to/web/html:/var/www/html # Mount html content to manage your project locally
+            - /path/to/html/nginx/8008:/etc/nginx/http.d # Mount Nginx config.
+            - /path/to/html/web:/var/www/html/web # Mount the Symfony html content
         networks:
             - docker-symfony-network
 
