@@ -18,7 +18,7 @@ ___
 
 A lightweight Docker image combining the latest version of PHP ([php:fpm-alpine](https://hub.docker.com/layers/library/php/fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore)) and the latest version of Nginx server to run the latest version of [Symfony](https://symfony.com/doc/current/setup.html) PHP applications. Ideal for local development, testing, or production environments.
 
-* [Nginx](https://nginx.org) is a simple and powerfull webserver used to serve your php files. The config files reside in `/etc/nginx/conf.d` for easy user customization.
+* [Nginx](https://nginx.org) is a simple and powerfull webserver used to serve your php files. The config files reside in `/etc/nginx/http.d` for easy user customization.
 * [PHP](https://www.php.net) is a popular general-purpose scripting language that powers everything from your blog to the most popular websites.
 * [Symfony](https://symfony.com/doc/current/setup.html) is a web application framework that makes it easy to develop robust and scalable web applications. The index file of your project resides in `/var/www/html/web/public`
 * [Alpine Linux](https://hub.docker.com/_/alpine) is a lightweight and security-focused Linux distribution known for its minimal size. This small footprint makes the Alpine image a popular choice for creating compact and efficient Docker containers.
