@@ -100,7 +100,7 @@ Docker compose file:
 name: docker-symfony
 services:
     symfony-8008: # service name
-        image: kprimecity/docker-symfony:latest
+        image: ghcr.io/kprimecity/docker-symfony:latest
         container_name: symfony-8008 # Your Container name
         restart: always
         ports:
@@ -126,13 +126,13 @@ Docker Run command:
 docker network create -d bridge docker-symfony-network \
 docker network create docker-symfony_default \
 docker run --net docker-symfony-network \
---name symfony-8008 \
---restart always \
--p 8008:80 \
--p 8043:443 \
--v /path/to/html/nginx/8008:/etc/nginx/http.d \
--v /path/to/html/web:/var/www/html/web \
-kprimecity/docker-symfony:latest
+    --name symfony-8008 \
+    --restart always \
+    -p 8008:80 \
+    -p 8043:443 \
+    -v /path/to/html/nginx/8008:/etc/nginx/http.d \
+    -v /path/to/html/web:/var/www/html/web \
+    ghcr.io/kprimecity/docker-symfony:latest
 ```
 
 ### 3. Build the Docker Image & Run the Container
@@ -200,6 +200,11 @@ ___
 * [Alpine Linux docker base image](https://hub.docker.com/_/alpine)
 * [Symfony community](https://symfony.com/community)
 
+___
+
+# 🎯 Versions
+* __[v2.0.9] - 08/31/2025__: Combine all in one Docker Image.
+* __[v1.0.0] - 08/09/2025__: Intial Release.
 ___
 
 Take care! 💖 
