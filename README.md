@@ -203,6 +203,7 @@ ___
 ___
 
 # 🎯 Versions
+* __[v2.1.0] - 09/16/2025__: Add the PHP-OPcache and configure the upload file size.
 * __[v2.0.9] - 08/31/2025__: Combine all in one Docker Image.
 * __[v1.0.0] - 08/09/2025__: Intial Release.
 ___
