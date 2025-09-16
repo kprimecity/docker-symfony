@@ -23,7 +23,7 @@ WORKDIR /var/www/html/web
 # Install Nginx and other necessary packages
 RUN apk update && apk upgrade && \
     apk add --no-cache --update \
-    openrc nano curl git bash icu-dev nginx \
+    nano curl git bash icu-dev nginx \
     supervisor openssl \
     libpng-dev \
     libjpeg-turbo-dev \
