@@ -37,9 +37,14 @@ else
     cd /var/www/html/ && COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton web
     cd /var/www/html/web/ && COMPOSER_ALLOW_SUPERUSER=1 composer require webapp && COMPOSER_ALLOW_SUPERUSER=1 composer update
     cd /var/www/html/
+
+    addgroup www-data
+    adduser -D -H -G www-data www-data
+    
+    chown -R www-data:www-data web/
+    chmod -R 775 web/
 fi
 
 # Update and clear the cache
 apk update && apk upgrade && apk cache sync
-
 exec supervisord -c /etc/supervisord.conf
