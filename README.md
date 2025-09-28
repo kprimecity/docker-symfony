@@ -174,6 +174,7 @@ ___
   * Put your project under a Reverse Proxy, you can use [Nginx Proxy Manager](https://nginxproxymanager.com/guide/),
   * Or change the SSL source in the `-v /path/to/html/nginx/8008` to make Nginx use your own SSL.
 * Your project URLs: `http://xx.xx.xx.xx:8008` (`No Symfony ssl`) or `https://xx.xx.xx.xx:8043` (`With Symfony ssl`).
+* Set `enable_native_lazy_objects: true` in `'%kernel.project_dir%/config/packages/doctrine.yaml'` to avoid this error: `Since doctrine/doctrine-bundle 2.16: Not setting "doctrine.orm.enable_native_lazy_objects" to true is deprecated.`
 
 # 🤝 Contributing
 
@@ -203,7 +204,9 @@ ___
 ___
 
 # 🎯 Versions
-* __[v2.1.0] - 09/16/2025__: Add the PHP-OPcache and configure the upload file size.
+
+* __[v3.0.0] - 09/28/2025__: Add the user and group `www-data` and grant them permission `775`. Add the `exif` extension.
+* __[v2.1.0] - 09/16/2025__: Add the `PHP-OPcache` extension and configure the upload file size.
 * __[v2.0.9] - 08/31/2025__: Combine all in one Docker Image.
 * __[v1.0.0] - 08/09/2025__: Intial Release.
 ___
