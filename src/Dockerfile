@@ -2,8 +2,8 @@
 FROM php:fpm-alpine
 
 # Set version labels
-ARG BUILD_DATE=09/15/2025
-ARG VERSION=v2.1.0
+ARG BUILD_DATE=09/28/2025
+ARG VERSION=v3.0.0
 
 LABEL org.opencontainers.image.maintainer="kprimecity"
 LABEL org.opencontainers.image.title="docker-symfony"
@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.created=${BUILD_DATE}
 LABEL org.opencontainers.image.vendor="https://github.com/kprimecity/docker-symfony"
 LABEL org.opencontainers.image.description="Run the Symfony framework in a Docker container (all necessary modules are included). Good to go!"
 LABEL com.docker.desktop.extension.api.version=${VERSION}
-LABEL com.docker.extension.detailed.description="Run Symfony framework using Nginx and php-fpm."
+LABEL com.docker.extension.detailed.description="Run Symfony framework using Nginx and PHP fpm-alpine."
 LABEL com.docker.extension.publisher.url="https://github.com/kprimecity/docker-symfony"
 LABEL org.opencontainers.image.source="https://github.com/kprimecity/docker-symfony" 
 LABEL com.docker.extension.screenshots='[{"alt": "screenshot one", "url": "https://private-user-images.githubusercontent.com/15088570/479583967-ebcbc084-6769-4a7a-865d-e4f2d8df1ab1.PNG?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTY2Nzk4NDgsIm5iZiI6MTc1NjY3OTU0OCwicGF0aCI6Ii8xNTA4ODU3MC80Nzk1ODM5NjctZWJjYmMwODQtNjc2OS00YTdhLTg2NWQtZTRmMmQ4ZGYxYWIxLlBORz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA4MzElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwODMxVDIyMzIyOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWM1NzBmMTJhY2QxZDU4NjJkMmY2YzljMjQxYmQzYzc0NmE2NDM2YWMzYjE5NzcwNjExZWI5Nzc4YWU2OWI5NzImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.ykTtSlDWfJHXBSgvrsy_hN93j-c6gserow1yS8iRlTo"}]'
@@ -30,10 +30,11 @@ RUN apk update && apk upgrade && \
     freetype-dev \
     python3 py3-pip \
     libzip-dev \
-    zip unzip
+    zip unzip libexif-dev
 
 # Configure and install the php extension
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install exif
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo_mysql
