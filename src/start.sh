@@ -1,21 +1,28 @@
 #!/bin/bash
 
 PHP_INI="/custom-php.ini"
-OPCACHE="/opcache.ini"
+OPCACHE="/custom-opcache.ini"
+WWW_PHP_FPM="/custom-www-php-fpm.conf"
 NGINX_CONF="/nginx.conf"
 DEFAULT_CONF="/default.conf"
 INDEX_FILE_PATH="/var/www/html/web/public/index.php"
 
 if [ -f "$PHP_INI" ]; then
     # Move the php ini file...
-    mv /custom-php.ini /usr/local/etc/php/conf.d/custom-php.ini
+    mv "$PHP_INI" /usr/local/etc/php/conf.d"$PHP_INI"
     echo "Your custom PHP ini file is located at: '/usr/local/etc/php/conf.d$PHP_INI'."
 fi
 
 if [ -f "$OPCACHE" ]; then
     # Move the php ini file...
-    mv /opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+    mv "$OPCACHE" /usr/local/etc/php/conf.d"$OPCACHE"
     echo "Your custom opcache ini file is located at: '/usr/local/etc/php/conf.d$OPCACHE'."
+fi
+
+if [ -f "$WWW_PHP_FPM" ]; then
+    # Move the php ini file...
+    mv "$WWW_PHP_FPM" /etc/php/fpm/pool.d"$WWW_PHP_FPM"
+    echo "Your custom php-fpm pool file is located at: '/etc/php/fpm/pool.d$WWW_PHP_FPM'."
 fi
 
 if [ -f "$NGINX_CONF" ]; then
@@ -50,5 +57,8 @@ else
 fi
 
 # Update and clear the cache
-apk update && apk upgrade && apk cache sync
+apk update && apk upgrade 
+apk cache sync
+
+# Start all services
 exec supervisord -c /etc/supervisord.conf
