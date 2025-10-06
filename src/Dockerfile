@@ -27,7 +27,7 @@ RUN apk update && apk upgrade && \
     supervisor openssl python3 py3-pip \
     libpng-dev libjpeg-turbo-dev freetype-dev \
     libzip-dev zip unzip libexif-dev \
-    youtube-dl ffmpeg libx264
+    youtube-dl ffmpeg x264-libs
 
 # Configure and install the php extension
 RUN docker-php-ext-install zip
