@@ -34,8 +34,12 @@ if [ -f "$INDEX_FILE_PATH" ]; then
     echo "Your index file is located at: '$INDEX_FILE_PATH'."
 else
     echo "Downloading symfony framework..."
-    cd /var/www/html/ && COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton web
-    cd /var/www/html/web/ && COMPOSER_ALLOW_SUPERUSER=1 composer require webapp && COMPOSER_ALLOW_SUPERUSER=1 composer update
+    cd /var/www/html/
+    COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton web
+    cd /var/www/html/web/
+    COMPOSER_ALLOW_SUPERUSER=1 composer require webapp
+    COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master
+    COMPOSER_ALLOW_SUPERUSER=1 composer update
     cd /var/www/html/
 
     addgroup www-data
