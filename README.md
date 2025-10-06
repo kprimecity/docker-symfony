@@ -205,6 +205,7 @@ ___
 
 # 🎯 Versions
 
+* __[v3.0.9] - 10/06/2025__: Add `youtube-dl ffmpeg x264-libs` packages.
 * __[v3.0.0] - 09/28/2025__: Add the user and group `www-data` and grant them permission `775`. Add the `exif` (Exchangeable image information) extension.
 * __[v2.1.0] - 09/16/2025__: Add the `PHP-OPcache` extension and configure the upload file size.
 * __[v2.0.9] - 08/31/2025__: Combine all in one Docker Image.
