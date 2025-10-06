@@ -3,7 +3,7 @@ FROM php:fpm-alpine
 
 # Set version labels
 ARG BUILD_DATE=09/28/2025
-ARG VERSION=v3.0.0
+ARG VERSION=v3.0.9
 
 LABEL org.opencontainers.image.maintainer="kprimecity"
 LABEL org.opencontainers.image.title="docker-symfony"
@@ -24,13 +24,10 @@ WORKDIR /var/www/html/web
 RUN apk update && apk upgrade && \
     apk add --no-cache --update \
     nano curl git bash icu-dev nginx \
-    supervisor openssl \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    python3 py3-pip \
-    libzip-dev \
-    zip unzip libexif-dev
+    supervisor openssl python3 py3-pip \
+    libpng-dev libjpeg-turbo-dev freetype-dev \
+    libzip-dev zip unzip libexif-dev \
+    youtube-dl ffmpeg libx264
 
 # Configure and install the php extension
 RUN docker-php-ext-install zip
