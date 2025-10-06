@@ -49,7 +49,10 @@ COPY default.conf /default.conf
 COPY custom-php.ini /custom-php.ini
 
 # Customize the opcache extension
-COPY opcache.ini /opcache.ini
+COPY custom-opcache.ini /custom-opcache.ini
+
+# Customize the PHP-FPM pool for the WWW user
+COPY custom-www-php-fpm.conf /custom-www-php-fpm.conf
 
 # Config file to manage both Nginx and PHP-FPM
 COPY supervisord.conf /etc/supervisord.conf
