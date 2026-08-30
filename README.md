@@ -45,6 +45,37 @@ ___
 
 ## 🛠️ Local Stack Configuration Layout
 
+If you want run only the docker-symfony core image, here is the docker-compose file.
+
+```yaml
+name: docker-symfony
+
+services:
+  # 🌐 1. Custom Symfony Framework & Web Engine Container
+  symfony-8008:
+    image: kprimecity/docker-symfony:latest
+    container_name: symfony-8008
+    restart: always
+    ports:
+      - "8008:80"   # Access site locally via http://localhost:8008
+      - "8443:443"  # Access site securely via https://localhost:8443
+    volumes:
+      - /path/to/project/nginx/ssl:/etc/ssl/nginx  # Mount custom SSL certificate pair folders
+      - /path/to/project/nginx:/etc/nginx/http.d   # Mount Virtual Host configuration blocks
+      - /path/to/project/html:/var/www/html        # Mount the Symfony framework source files
+    networks:
+      - docker-symfony-network
+
+networks:
+  docker-symfony-network:
+    name: docker-symfony-network
+    driver: bridge
+  default:
+    name: docker-symfony_default
+```
+
+---
+
 This is the orchestration profile showing how to hook up your Symfony container seamlessly alongside isolated **PostgreSQL**, **Redis**, and **pgAdmin** data layers.
 
 ```yaml
@@ -53,16 +84,16 @@ name: docker-symfony
 services:
   # 🌐 1. Custom Symfony Framework & Web Engine Container
   symfony-8008:
-    image: ghcr.io/kprimecity/docker-symfony:latest
+    image: kprimecity/docker-symfony:latest
     container_name: symfony-8008
     restart: always
     ports:
       - "8008:80"   # Access site locally via http://localhost:8008
       - "8443:443"  # Access site securely via https://localhost:8443
     volumes:
-      - /path/to/html/nginx/ssl:/etc/ssl/nginx  # Mount custom SSL certificate pair folders
-      - /path/to/html/nginx:/etc/nginx/http.d   # Mount Virtual Host configuration blocks
-      - /path/to/html:/var/www/html             # Mount the Symfony framework source files
+      - /path/to/project/nginx/ssl:/etc/ssl/nginx  # Mount custom SSL certificate pair folders
+      - /path/to/project/nginx:/etc/nginx/http.d   # Mount Virtual Host configuration blocks
+      - /path/to/project/html:/var/www/html        # Mount the Symfony framework source files
     environment:
       DATABASE_URL: "postgresql://symfony_user:secure_password@postgres-db:5432/symfony_db?serverVersion=16&charset=utf8"
       REDIS_URL: "redis://:redis_secure_pass@redis-cache:6339"
@@ -169,8 +200,7 @@ https://localhost:8443
 You should see your index page rendered by the `docker-symfony's nginx server`.
 
 <div align="center" width="100%">
-  <img width="100%" height="auto" alt="Home Page Screenshot" src="https://github.com/user-attachments/assets/3c2c8de8-3c72-4a75-b7a6-393fe40c4cb3" />
-
+    <img width="100%" height="auto" alt="Home Page Screenshot" src="https://github.com/user-attachments/assets/7ea4a7c6-b241-4cf8-9e50-574bcd6bcd8b" />
 </div>
 
 <br/>
