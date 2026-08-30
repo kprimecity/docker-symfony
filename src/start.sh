@@ -23,10 +23,12 @@ if [ -f "/$OPCACHE" ]; then
     echo "Your custom opcache ini file is located at: '/usr/local/etc/php/conf.d/$OPCACHE'."
 fi
 
-# Move the WWW_PHP_FPM file...
+# Move the WWW_PHP_FPM file and completely overwrite the default pool file
 if [ -f "/$WWW_PHP_FPM" ]; then
-    mv "/$WWW_PHP_FPM" /usr/local/etc/php-fpm.d/"$WWW_PHP_FPM"
-    echo "Your custom php-fpm pool file is located at: '/usr/local/etc/php-fpm.d/$WWW_PHP_FPM'."
+    # FIXED: Forcibly replaces the default www.conf with your optimized file
+    mv -f "/$WWW_PHP_FPM" /usr/local/etc/php-fpm.d/www.conf
+    echo "Your essential custom pool configuration has completely replaced the default www.conf."
+	echo "Your custom php-fpm pool file is located at: '/usr/local/etc/php-fpm.d/www.conf'."
 fi
 
 # Move the NGINX_CONF file...
