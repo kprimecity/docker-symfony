@@ -1,6 +1,25 @@
-name: Build and Push Docker Symfony Image
+name: Build and Push Docker-Symfony Image
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+      - master
+    # FIXED: The workflow will NOT run if ONLY these files are modified
+    paths-ignore:
+      - 'README.md'
+      - 'Config.md'
+      - 'LICENSE'
+      - 'docs/**'  # Ignores everything inside a docs folder if you make one
+  pull_request:
+    branches:
+      - main
+      - master
+    paths-ignore:
+      - 'README.md'
+      - 'Config.md'
+      - 'LICENSE'
+      - 'docs/**'
 
 env:
   REGISTRY: ghcr.io
