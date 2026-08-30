@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Exit immediately if any command fails
+set -e
+
 PHP_INI="/custom-php.ini"
 OPCACHE="/custom-opcache.ini"
 WWW_PHP_FPM="/custom-www-php-fpm.conf"
 NGINX_CONF="/nginx.conf"
 DEFAULT_CONF="/default.conf"
-INDEX_FILE_PATH="/var/www/html/web/public/index.php"
+INDEX_FILE_PATH="/var/www/html/public/index.php"
 
 if [ -f "$PHP_INI" ]; then
     # Move the php ini file...
@@ -40,21 +43,28 @@ fi
 if [ -f "$INDEX_FILE_PATH" ]; then
     echo "Your index file is located at: '$INDEX_FILE_PATH'."
 else
-    echo "Downloading symfony framework..."
-    cd /var/www/html/
-    COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton web
-    cd /var/www/html/web/
-    COMPOSER_ALLOW_SUPERUSER=1 composer require webapp
-    COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master
-    COMPOSER_ALLOW_SUPERUSER=1 composer update
-    cd /var/www/html/
+    echo "Downloading Symfony framework..."
+    
+	cd /var/www/html
+    COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton .
+    COMPOSER_ALLOW_SUPERUSER=1 composer require webapp --no-interaction --prefer-dist
+    COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
+
+	echo "Installing dependencies..."
+    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --no-dev
+    COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist
 
     addgroup www-data
     adduser -D -H -G www-data www-data
     
-    chown -R www-data:www-data web/
-    chmod -R 775 web/
+    chown -R www-data:www-data /var/html
+    chmod -R 775 /var/html
 fi
+
+# Clear and warm up the cache for the specific environment
+echo "Warming up application cache..."
+php bin/console cache:clear --no-interaction
+php bin/console cache:warmup --no-interaction
 
 # Update and clear the cache
 apk update && apk upgrade 
@@ -62,3 +72,6 @@ apk cache sync
 
 # Start all services
 exec supervisord -c /etc/supervisord.conf
+
+# Execute the primary container command in Dockerfile(php-fpm)
+exec "$@"
