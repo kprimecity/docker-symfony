@@ -1,21 +1,88 @@
 name: docker-symfony
+
 services:
-    symfony-8008: # service name
-        image: kprimecity/docker-symfony:latest
-        container_name: symfony-8008 # Your Container name
-        restart: always
-        ports:
-            - 8008:80 # http://xx.xx.xx.xx:8008
-            - 8043:443 # Optional: https://xx.xx.xx.xx:8043
-        volumes:
-            - /path/to/html/nginx/8008:/etc/nginx/http.d # Mount Nginx config.
-            - /path/to/html/web:/var/www/html/web # Mount the Symfony html content
-        networks:
-            - docker-symfony-network
+  # 🌐 1. Your Custom Symfony Framework Container
+  symfony-8008:
+    image: kprimecity/docker-symfony:latest
+    container_name: symfony-8008
+    restart: always
+    ports:
+      - "8008:80"   # http://localhost:8008
+      - "8443:443"  # Optional: activate the Symfony default ssl in: /etc/nginx/http.d/default.conf or use a reverse proxy
+    volumes:
+      - /path/to/html/nginx:/etc/nginx/http.d  # Mount Nginx config
+      - /path/to/html:/var/www/html            # Mount the Symfony html content
+    environment:
+      # Automatically pass connection strings into Symfony's infrastructure
+      DATABASE_URL: "postgresql://symfony_user:secure_password@postgres-db:5432/symfony_db?serverVersion=16&charset=utf8"
+      REDIS_URL: "redis://:redis_secure_pass@redis-cache:6339"
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      redis-cache:
+        condition: service_healthy
+    networks:
+      - docker-symfony-network
+
+  # 🐘 2. Standalone PostgreSQL Engine Container
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres_db_engine
+    restart: always
+    environment:
+      POSTGRES_DB: symfony_db
+      POSTGRES_USER: symfony_user
+      POSTGRES_PASSWORD: secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persists database data locally
+    ports:
+      - "5432:5432"  # Exposed locally for external tools (e.g., DBeaver / DataGrip)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U symfony_user -d symfony_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - docker-symfony-network
+
+  # 🔴 3. Standalone Redis Cache Storage Container
+  redis-cache:
+    image: redis:7-alpine
+    container_name: redis_cache_engine
+    restart: always
+    command: redis-server --port 6339 --requirepass redis_secure_pass
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "6339", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - docker-symfony-network
+
+  # 🗄️ 4. Standalone pgAdmin Management UI Container
+  pgadmin-ui:
+    image: dpage/pgadmin4
+    container_name: pgadmin_management_web
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com      # UI Login Email
+      PGADMIN_DEFAULT_PASSWORD: admin_secure_pass   # UI Login Password
+    ports:
+      - "5050:80"    # Access pgAdmin locally via http://localhost:5050
+    depends_on:
+      - postgres-db
+    networks:
+      - docker-symfony-network
+
+volumes:
+  postgres_data:
+  redis_data:
 
 networks:
-    docker-symfony-network:
-        name: docker-symfony-network
-        driver: bridge
-    default:
-        name: docker-symfony_default
+  docker-symfony-network:
+    name: docker-symfony-network
+    driver: bridge
+  default:
+    name: docker-symfony_default
