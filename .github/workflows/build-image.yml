@@ -1,4 +1,4 @@
-name: Build and Push Docker Symfony Image
+name: Build and Push Docker-Symfony Image
 
 on: [push, pull_request]
 
@@ -8,7 +8,7 @@ env:
 
 jobs:
   build-and-push:
-    name: Build & Publish Image
+    name: Build and Publish Image
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,7 +18,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up QEMU for multi-platform build compatibility
       - name: Set up QEMU
         uses: actions/setup-qemu-action@v3
 
@@ -49,7 +48,7 @@ jobs:
           context: ./src
           file: ./src/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ id.meta.outputs.tags }}
-          labels: ${{ id.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
