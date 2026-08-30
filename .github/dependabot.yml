@@ -1,0 +1,18 @@
+version: 2
+updates:
+  # Check for GitHub Actions updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      # Group updates together to avoid PR spam
+      github-actions-dependencies:
+        patterns:
+          - "*"
+
+  # Optional: Check for Composer (Symfony) updates
+  - package-ecosystem: "composer"
+    directory: "/src" # Adjust this path if composer.json is located elsewhere
+    schedule:
+      interval: "weekly"
