@@ -19,7 +19,7 @@ LABEL org.opencontainers.image.maintainer="kprimecity" \
 
 WORKDIR /var/www/html
 
-# 1. Install runtime utilities, media engines, and permanent client libraries
+# 1. Install runtime utilities, media engines, and permanent client runtimes
 RUN apk upgrade --no-cache && \
     apk add --no-cache \
     nano curl git bash nginx \
@@ -31,6 +31,8 @@ RUN apk upgrade --no-cache && \
 # 2. Build and compile PHP extensions + Redis via PECL in a clean isolation layer
 RUN apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
+        linux-headers \
+        zlib-dev \
         icu-dev \
         postgresql-dev \
         libpng-dev \
