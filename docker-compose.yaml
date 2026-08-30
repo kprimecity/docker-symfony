@@ -8,8 +8,9 @@ services:
     restart: always
     ports:
       - "8008:80"   # http://localhost:8008
-      - "8443:443"  # Optional: activate the Symfony default ssl in: /etc/nginx/http.d/default.conf or use a reverse proxy
+      - "8443:443"  # Optional: Using default Symfony certs. Drop your certs files in: /etc/ssl/nginx/ | Nginx ssl config: /etc/nginx/http.d/default.conf or use a reverse proxy
     volumes:
+      - /path/to/html/nginx/ssl:/etc/ssl/nginx  # Mount SSL files. Note! All files will be renamed (e.g: server.key and server.crt).
       - /path/to/html/nginx:/etc/nginx/http.d  # Mount Nginx config
       - /path/to/html:/var/www/html            # Mount the Symfony html content
     environment:
