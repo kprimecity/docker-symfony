@@ -1,6 +1,6 @@
 version: 2
 updates:
-  # 1. Automatically track and check for GitHub Actions updates
+  # 1. Track GitHub Actions core dependencies (Wakes up weekly)
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -11,9 +11,9 @@ updates:
         patterns:
           - "*"
 
-  # 2. Automatically track and check for Symfony/Composer updates
+  # 2. Track Symfony / Composer dependencies inside your code layer
   - package-ecosystem: "composer"
-    # FIXED: Cleared the leading slash to conform to Dependabot относительный directory mapping constraints
+    # FIXED: Set to relative directory path "src" matching the layout context
     directory: "src"
     schedule:
       interval: "weekly"
