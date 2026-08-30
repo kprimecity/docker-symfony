@@ -55,8 +55,8 @@ else
     COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
 
     echo "Installing dependencies..."
-    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --no-dev
-    COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-interaction --no-dev --classmap-authoritative
+    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist
+    COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-interaction --classmap-authoritative
     COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist
 fi
 
