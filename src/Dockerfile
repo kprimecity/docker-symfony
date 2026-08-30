@@ -19,50 +19,35 @@ LABEL org.opencontainers.image.maintainer="kprimecity" \
 
 WORKDIR /var/www/html
 
-# 1. Install runtime utilities, media engines, and permanent client runtimes
+# 1. Install runtime utilities, system tools, media engines, and server layers
 RUN apk upgrade --no-cache && \
     apk add --no-cache \
     nano curl git bash nginx \
-    icu-libs postgresql-client libpq \
     supervisor openssl python3 py3-pip \
-    libpng libjpeg-turbo freetype libzip libexif \
     youtube-dl ffmpeg x264-libs
 
-# 2. Build and compile PHP extensions + Redis via PECL in a clean isolation layer
-RUN apk add --no-cache --virtual .build-deps \
-        $PHPIZE_DEPS \
-        linux-headers \
-        zlib-dev \
-        icu-dev \
-        postgresql-dev \
-        libpng-dev \
-        libjpeg-turbo-dev \
-        freetype-dev \
-        libzip-dev \
-        libexif-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install -j$(nproc) \
-        zip \
-        exif \
-        opcache \
-        mysqli \
-        pdo_mysql \
-        pdo_pgsql \
-        gd \
-        intl \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && apk del .build-deps \
-    && rm -rf /tmp/pear
+# 2. Grab the official high-performance PHP extension helper binary
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-# 3. Download and install Composer & Symfony Cli (While still root)
+# 3. Securely compile and enable all required database, memory, cache, and processing extensions
+RUN install-php-extensions \
+    zip \
+    exif \
+    opcache \
+    mysqli \
+    pdo_mysql \
+    pdo_pgsql \
+    gd \
+    intl \
+    redis
+
+# 4. Download and install Composer & Symfony Cli (While still root)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && curl -sS https://get.symfony.com/cli/installer | bash \
     && mv /root/.symfony5/bin/symfony /usr/local/bin/symfony \
     && symfony server:ca:install
 
-# 4. Copy structural configuration file templates
+# 5. Copy structural configuration file templates
 COPY nginx.conf /nginx.conf
 COPY default.conf /default.conf
 COPY custom-php.ini /custom-php.ini
@@ -73,7 +58,7 @@ COPY supervisord.conf /etc/supervisord.conf
 # Remove the System Nginx default template layout
 RUN rm -f /usr/share/nginx/http-default_server.conf
 
-# 5. Bring in and set up entrypoint scripts safely
+# 6. Bring in and set up entrypoint scripts safely
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
