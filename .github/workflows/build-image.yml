@@ -1,18 +1,6 @@
-name: Build and Push Docker-Symfony Image
+name: Build and Push Docker Symfony Image
 
-on:
-  push:
-    branches:
-      #- main
-      #- master
-      - '**'
-    tags:
-      - 'v*.*.*'
-  pull_request:
-    branches:
-      #- main
-      #- master
-      - '**'
+on: [push, pull_request]
 
 env:
   REGISTRY: ghcr.io
@@ -27,18 +15,16 @@ jobs:
       packages: write
 
     steps:
-      # 1. Check out your repository files
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Set up automated multi-platform builders
+      # Set up QEMU for multi-platform build compatibility
       - name: Set up QEMU
         uses: actions/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: actions/setup-buildx-action@v3
 
-      # 3. Log into GitHub Container Registry (GHCR)
       - name: Log in to the Container registry
         if: github.event_name != 'pull_request'
         uses: actions/docker-login-action@v3
@@ -47,32 +33,23 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4. Extract smart tags matching your repository tags
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
             type=ref,event=branch
             type=sha,format=short
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+            type=raw,value=latest
 
-      # 5. Build and Push the image using your correct folder structure
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          # FIXED: Shifted context paths into your repository's src/ directory
           context: ./src
           file: ./src/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ id.meta.outputs.tags }}
           labels: ${{ id.meta.outputs.labels }}
-          build-args: |
-            BUILD_DATE=${{ fromJSON(id.meta.outputs.json).labels['org.opencontainers.image.created'] }}
-            VERSION=${{ fromJSON(id.meta.outputs.json).labels['org.opencontainers.image.version'] || 'edge' }}
-          # Drastically accelerates workflows by leveraging internal GitHub cache builders
           cache-from: type=gha
           cache-to: type=gha,mode=max
