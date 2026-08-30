@@ -10,10 +10,13 @@ services:
       - "8008:80"   # http://localhost:8008
       - "8443:443"  # Optional: Using default Symfony certs. Drop your certs files in: /etc/ssl/nginx/ | Nginx ssl config: /etc/nginx/http.d/default.conf or use a reverse proxy
     volumes:
-      - /path/to/html/nginx/ssl:/etc/ssl/nginx  # Mount SSL files. Note! All files will be renamed (e.g: server.key and server.crt).
-      - /path/to/html/nginx:/etc/nginx/http.d  # Mount Nginx config
-      - /path/to/html:/var/www/html            # Mount the Symfony html content
+      - /path/to/project/nginx/ssl:/etc/ssl/nginx  # Mount SSL files. Note! All files will be renamed (e.g: server.key and server.crt).
+      - /path/to/project/nginx:/etc/nginx/http.d  # Mount Nginx config
+      - /path/to/project/html:/var/www/html            # Mount the Symfony html content
     environment:
+      # FIXED: Force Symfony into production execution mode
+      APP_ENV: dev # you can also use prod mode
+      APP_DEBUG: 1 # you can also use 0 to disable
       # Automatically pass connection strings into Symfony's infrastructure
       DATABASE_URL: "postgresql://symfony_user:secure_password@postgres-db:5432/symfony_db?serverVersion=16&charset=utf8"
       REDIS_URL: "redis://:redis_secure_pass@redis-cache:6339"
