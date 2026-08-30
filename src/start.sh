@@ -60,6 +60,18 @@ else
     COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist
 fi
 
+# Move and secure Symfony CLI development certificates if they exist
+if [ -d "/root/.symfony5/certs" ]; then
+    echo "🔐 Copying and securing Symfony development certificates..."
+    mkdir -p /etc/ssl/nginx
+    cp /root/.symfony5/certs/rootCA.pem /etc/ssl/nginx/symfony-ca.pem
+    cp /root/.symfony5/certs/rootCA-key.pem /etc/ssl/nginx/symfony-ca-key.key
+    
+    # Ensure www-data can read the certificate files
+    chown -R www-data:www-data /etc/ssl/nginx
+    chmod 600 /etc/ssl/nginx/symfony-ca-key.key
+fi
+
 # Clear and warm up the cache for the specific environment
 if [ -d "/var/www/html/var/cache" ]; then
     echo "🧹 Clearing old application cache..."
