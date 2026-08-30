@@ -19,18 +19,26 @@ LABEL org.opencontainers.image.maintainer="kprimecity" \
 
 WORKDIR /var/www/html
 
-# 1. Install runtime utilities and compilation headers in one step
+# 1. Install runtime utilities, media engines, and permanent client libraries
 RUN apk upgrade --no-cache && \
     apk add --no-cache \
     nano curl git bash nginx \
-    icu-libs icu-dev postgresql-dev \
+    icu-libs postgresql-client libpq \
     supervisor openssl python3 py3-pip \
-    libpng-dev libjpeg-turbo-dev freetype-dev \
-    libzip-dev zip unzip libexif-dev \
+    libpng libjpeg-turbo freetype libzip libexif \
     youtube-dl ffmpeg x264-libs
 
-# 2. Configure and install all PHP extensions in a single layer (Added Redis)
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+# 2. Build and compile PHP extensions + Redis via PECL in a clean isolation layer
+RUN apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        icu-dev \
+        postgresql-dev \
+        libpng-dev \
+        libjpeg-turbo-dev \
+        freetype-dev \
+        libzip-dev \
+        libexif-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure intl \
     && docker-php-ext-install -j$(nproc) \
         zip \
@@ -41,11 +49,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         pdo_pgsql \
         gd \
         intl \
-    # Install build tools temporarily, compile redis extension via pecl, then strip build tools
-    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS autoconf g++ make \
     && pecl install redis \
     && docker-php-ext-enable redis \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && rm -rf /tmp/pear
 
 # 3. Download and install Composer & Symfony Cli (While still root)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
