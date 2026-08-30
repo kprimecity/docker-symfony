@@ -1,18 +1,24 @@
 version: 2
 updates:
-  # Check for GitHub Actions updates
+  # 1. Automatically track and check for GitHub Actions updates
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     groups:
-      # Group updates together to avoid PR spam
+      # Safely bundles all minor/patch action updates into a single collective PR
       github-actions-dependencies:
         patterns:
           - "*"
 
-  # Optional: Check for Composer (Symfony) updates
+  # 2. Automatically track and check for Symfony/Composer updates
   - package-ecosystem: "composer"
-    directory: "/src" # Adjust this path if composer.json is located elsewhere
+    # FIXED: Cleared the leading slash to conform to Dependabot относительный directory mapping constraints
+    directory: "src"
     schedule:
       interval: "weekly"
+    groups:
+      # Optional: Bundles your Symfony composer updates together cleanly too!
+      php-dependencies:
+        patterns:
+          - "*"
