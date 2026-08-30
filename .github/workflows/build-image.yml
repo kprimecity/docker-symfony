@@ -1,0 +1,81 @@
+name: Build and Push Docker Symfony Image
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches:
+      - main
+      - master
+
+env:
+  REGISTRY: ghcr.io
+  # Converts the repository name to lowercase safely to avoid GitHub Registry syntax bugs
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    name: Build & Publish Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # 1. Check out the repository source files
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up QEMU for multi-platform build compatibility if needed later
+      - name: Set up QEMU
+        uses: actions/setup-qemu-action@v3
+
+      # 3. Set up the Docker Buildx builder engine
+      - name: Set up Docker Buildx
+        uses: actions/setup-buildx-action@v3
+
+      # 4. Log in to the GitHub Container Registry (GHCR)
+      # This step skips on Pull Requests from forks to preserve absolute token safety
+      - name: Log in to the Container registry
+        if: github.event_name != 'pull_request'
+        uses: actions/docker-login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 5. Extract smart semantic metadata labels (tags like :latest, :v4.0.0, :sha-xxxx)
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=ref,event=branch
+            type=sha,format=short
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+
+      # 6. Build and Push the image with strict optimization layers
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          # Pushes the finalized image layers to the registry on branch/tag commits
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ id.meta.outputs.tags }}
+          labels: ${{ id.meta.outputs.labels }}
+          # Injects the compilation metrics matching your Dockerfile ARG requirements
+          build-args: |
+            BUILD_DATE=${{ fromJSON(id.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+            VERSION=${{ fromJSON(id.meta.outputs.json).labels['org.opencontainers.image.version'] || 'edge' }}
+          # CRITICAL FOR GITHUB: Pulls and pushes cache layers instantly via GitHub internal cache backend
+          # This keeps image generation speeds under 60 seconds on repeated deployments!
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
