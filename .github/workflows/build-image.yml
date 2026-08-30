@@ -1,16 +1,16 @@
-name: Build and Push Docker-Symfony Image
+name: Build and Push Docker Symfony Image
 
 on:
   push:
     branches:
       - main
       - master
-    # FIXED: The workflow will NOT run if ONLY these files are modified
+    # FIXED: The workflow will NOT run if ONLY these documentation files change
     paths-ignore:
       - 'README.md'
       - 'Config.md'
       - 'LICENSE'
-      - 'docs/**'  # Ignores everything inside a docs folder if you make one
+      - 'docs/**'
   pull_request:
     branches:
       - main
@@ -34,19 +34,16 @@ jobs:
       packages: write
 
     steps:
-      # This step stays as actions/ because it belongs to GitHub
+      # FIXED: Uses modern, non-deprecated node runner action tags
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # FIXED: Swapped from actions/ to docker/
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      # FIXED: Swapped from actions/ to docker/
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # FIXED: Swapped from actions/ to docker/
       - name: Log in to the Container registry
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
@@ -55,7 +52,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # FIXED: Swapped from actions/ to docker/
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -66,7 +62,6 @@ jobs:
             type=sha,format=short
             type=raw,value=latest
 
-      # FIXED: Swapped from actions/ to docker/
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
