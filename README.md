@@ -1,12 +1,13 @@
 # docker-symfony 🎁
-A Dockerized Symfony application based on Alpine Image, using the latest version of PHP (all necessary modules are included) and the latest version of Nginx server. This setup is ideal for local development, testing, and production environments. The container comes with: `bash`, `nano`, `curl`, `composer` and `symfony cli` packages, so you can use them directly in the container.
 
-[![GitHub](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=kprimecity.io&message=GitHub&logo=github)](https://github.com/kprimecity "view the source for all of our repositories.")
+A highly optimized, production-ready, cloud-native Docker image for the **Symfony Framework** running on a lightweight Alpine Linux base. This image bundles an optimized web server (**Nginx**), a high-performance process manager (**PHP-FPM**), process tracking (**Supervisor**), and comprehensive multimedia processing utilities (**FFmpeg**, `youtube-dl`). 
+
+It features an intelligent initialization runtime that configures performance metrics, hooks up multi-driver database extensions, scans for dynamic SSL files, and automatically bootstraps a blank Symfony framework template upon container boot if no code is present.
+
+[![GitHub](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=kprimecity.io&message=GitHub&logo=github)](https://github.com/kprimecity)
 [![GitHub Stars](https://img.shields.io/github/stars/kprimecity/docker-symfony.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/kprimecity/docker-symfony)
 [![GitHub Release](https://img.shields.io/github/release/kprimecity/docker-symfony.svg?color=008000&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/kprimecity/docker-symfony/releases)
-[![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=kprimecity.io&message=GitHub%20Package&logo=github)](https://github.com/kprimecity/docker-symfony/packages)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kprimecity/docker-symfony.svg?color=008000&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/kprimecity/docker-symfony)
-[![Docker Stars](https://img.shields.io/docker/stars/kprimecity/docker-symfony.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/kprimecity/docker-symfony)
 
 <div align="center" width="100%">
     <img width="100%" height="auto" alt="docker-symfony" src="https://github.com/user-attachments/assets/c52e6e0c-6097-4f8e-9fb2-57b439e6f5c7" />
@@ -14,202 +15,186 @@ A Dockerized Symfony application based on Alpine Image, using the latest version
 
 ___
 
-# 🐳 Symfony inside Alpine Docker Image
+## 🐳 Core Component Stack
 
-A lightweight Docker image combining the latest version of PHP ([php:fpm-alpine](https://hub.docker.com/layers/library/php/fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore)) and the latest version of Nginx server to run the latest version of [Symfony](https://symfony.com/doc/current/setup.html) PHP applications. Ideal for local development, testing, or production environments.
+*   **Nginx:** High-performance web server configured to securely execute tasks under `user www-data;`. Virtual host routing files reside inside `/etc/nginx/http.d/` for easy customization.
+*   **PHP-FPM:** Running high-concurrency worker pooling models (`pm.max_children = 50`) optimized to mitigate memory leaks by recycling processes safely via `max_requests`.
+*   **Symfony Ready:** Built-in runtime checks map your code directly to the modern web document root location at `/var/www/html/public`.
+*   **Alpine Linux:** Minimal, security-focused base image layer ensuring lightweight image footprint and fast deployments.
 
-* [Nginx](https://nginx.org) is a simple and powerfull webserver used to serve your php files. The config files reside in `/etc/nginx/http.d` for easy user customization.
-* [PHP](https://www.php.net) is a popular general-purpose scripting language that powers everything from your blog to the most popular websites.
-* [Symfony](https://symfony.com/doc/current/setup.html) is a web application framework that makes it easy to develop robust and scalable web applications. The index file of your project resides in `/var/www/html/web/public`
-* [Alpine Linux](https://hub.docker.com/_/alpine) is a lightweight and security-focused Linux distribution known for its minimal size. This small footprint makes the Alpine image a popular choice for creating compact and efficient Docker containers.
+---
 
-___
+## 📦 Extracted Image Features
 
-# 📦 Features
+*   **Multi-Driver Connection Unification:** Pre-compiled with **`pdo_mysql`**, **`pdo_pgsql`**, and `mysqli` extensions out of the box to eradicate connection errors.
+*   **Redis Caching Engine:** Built-in PHP-Redis extension support compiled natively via PECL for lightning-fast caching, user sessions, or Symfony Messenger background queues.
+*   **Spacious Thresholds:** Optimized upload thresholds (`128M`) paired cleanly alongside expanded execution buffers (`300s`) to ensure long video processing jobs handle smoothly.
+*   **Dynamic SSL Auto-Linking:** Scans mounted certificate folders on boot, linking any custom-named `.pem` or `.crt` file combinations directly into unified server symlinks.
+*   **PID 1 Compliance:** Implements `exec "$@"` process forwarding hooks to place the Supervisor engine as Process ID 1 for clean shutdown signaling in production clusters.
 
-* __Lightweight__: Built on Alpine Linux for minimal size.
-* __PHP__: Full PHP support with FPM (FastCGI Process Manager).
-* __Nginx__: High-performance web server with reverse proxy capabilities.
-* __Symfony Ready__: Out-of-the-box support for Symfony apps in `/var/www/html/web`.
-* __Easy Configuration__: Customizable Nginx and PHP-FPM settings.
-* __Ready to Use__: Out-of-the-box support for PHP applications.
+---
 
-___
-
-# ⚙️ Supported Architectures
-
-The architectures supported by this image are:
+## ⚙️ Supported Architectures
 
 | Architecture | Available | Tag |
 | :----: | :----: | ---- |
-| x86-64 | ✅ | amd64-\<version tag\> |
-| arm64 | ✅ | arm64v8-\<version tag\> |
+| x86-64 | ✅ | `amd64-<version-tag>` |
+| arm64 | ✅ | `arm64v8-<version-tag>` |
 
-___
+---
 
-# 🛠️ Configuration
+## 🛠️ Local Stack Configuration Layout
 
-This is the description of the Docker Compose file configuration.
-
->[!NOTE]
->This Image comes with the `Symfony Server Certificate` so you can use `https://` to access your project in development mode.
-
-You can use [Nginx Proxy Manager](https://nginxproxymanager.com/guide/) to put your project under a Reverse Proxy. In production mode.
-
-| 📌 Ports | 📚 Description |
-| :----: | :----: |
-| `8008` | Bind Port `80`: No `ssl` |
-| `8043` | Bind Port `443`: With `Symfony ssl` |
-| __📁 Volume__ | __📚 Description__ |
-| `./path/to/web/nginx` | Mount Nginx configuration folder: `/etc/nginx/http.d` |
-| `./path/to/html/web` | Mount symfony framework folder: `/var/www/html/web` |
-
-___
-
-# 🚀 Getting Started
-
-To help you get started creating a container from this image you can either use docker-compose or the docker cli. The easy way is to follow this steps:
-
-1. Clone or download the Repository: `git clone https://github.com/kprimecity/docker-symfony.git`,
-2. Go in the folder: `cd docker-symfony`
-3. Modify the docker-compose file according to your needs: `sudo nano docker-compose.yaml`,
-4. Run `sudo docker compose up -d` to set up and start a fresh Symfony project,
-5. Wait a few minutes for the Symfony framework to be downloaded, you can check the `container log` to see the progress,
-6. Open `https://localhost:8043` in your favorite web browser to access your project,
-7. Replace `localhost` by your local ip address.
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/kprimecity/docker-symfony.git
-cd docker-symfony
-```
-
-### 2. Set your configuration 
-
-```bash
-sudo nano docker-compose.yaml
-```
-
->[!NOTE]
->Modify the Docker Compose file before running it; so you can adjust your container according to your needs. Run the container using: `sudo docker compose up -d`. Wait a few minutes for the Symfony framework to be downloaded.
-
-Docker compose file:
+This is the orchestration profile showing how to hook up your Symfony container seamlessly alongside isolated **PostgreSQL**, **Redis**, and **pgAdmin** data layers.
 
 ```yaml
 name: docker-symfony
+
 services:
-    symfony-8008: # service name
-        image: ghcr.io/kprimecity/docker-symfony:latest
-        container_name: symfony-8008 # Your Container name
-        restart: always
-        ports:
-            - 8008:80 # http://xx.xx.xx.xx:8008
-            - 8043:443 # Optional: https://xx.xx.xx.xx:8043
-        volumes:
-            - /path/to/html/nginx/8008:/etc/nginx/http.d # Mount Nginx config.
-            - /path/to/html/web:/var/www/html/web # Mount the Symfony html content
-        networks:
-            - docker-symfony-network
+  # 🌐 1. Custom Symfony Framework & Web Engine Container
+  symfony-8008:
+    image: ghcr.io/kprimecity/docker-symfony:latest
+    container_name: symfony-8008
+    restart: always
+    ports:
+      - "8008:80"   # Access site locally via http://localhost:8008
+      - "8443:443"  # Access site securely via https://localhost:8443
+    volumes:
+      - /path/to/html/nginx/ssl:/etc/ssl/nginx  # Mount custom SSL certificate pair folders
+      - /path/to/html/nginx:/etc/nginx/http.d   # Mount Virtual Host configuration blocks
+      - /path/to/html:/var/www/html             # Mount the Symfony framework source files
+    environment:
+      DATABASE_URL: "postgresql://symfony_user:secure_password@postgres-db:5432/symfony_db?serverVersion=16&charset=utf8"
+      REDIS_URL: "redis://:redis_secure_pass@redis-cache:6339"
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      redis-cache:
+        condition: service_healthy
+    networks:
+      - docker-symfony-network
+
+  # 🐘 2. Standalone PostgreSQL Engine Container
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres_db_engine
+    restart: always
+    environment:
+      POSTGRES_DB: symfony_db
+      POSTGRES_USER: symfony_user
+      POSTGRES_PASSWORD: secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U symfony_user -d symfony_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - docker-symfony-network
+
+  # 🔴 3. Standalone Redis Cache Storage Container
+  redis-cache:
+    image: redis:7-alpine
+    container_name: redis_cache_engine
+    restart: always
+    command: redis-server --port 6339 --requirepass redis_secure_pass
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "6339", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - docker-symfony-network
+
+  # 🗄️ 4. Standalone pgAdmin Management UI Container
+  pgadmin-ui:
+    image: dpage/pgadmin4
+    container_name: pgadmin_management_web
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin_secure_pass
+    ports:
+      - "5050:80"    # Access database administration center via http://localhost:5050
+    depends_on:
+      - postgres-db
+    networks:
+      - docker-symfony-network
+
+volumes:
+  postgres_data:
+  redis_data:
 
 networks:
-    docker-symfony-network:
-        name: docker-symfony-network
-        driver: bridge
-    default:
-        name: docker-symfony_default
+  docker-symfony-network:
+    name: docker-symfony-network
+    driver: bridge
+  default:
+    name: docker-symfony_default
 ```
 
-Docker Run command:
+---
 
-```yaml
-docker network create -d bridge docker-symfony-network \
-docker network create docker-symfony_default \
-docker run --net docker-symfony-network \
-    --name symfony-8008 \
-    --restart always \
-    -p 8008:80 \
-    -p 8043:443 \
-    -v /path/to/html/nginx/8008:/etc/nginx/http.d \
-    -v /path/to/html/web:/var/www/html/web \
-    ghcr.io/kprimecity/docker-symfony:latest
-```
+## ⚡ Automated Runtime Initialization Workflow
 
-### 3. Build the Docker Image & Run the Container
+Every time your container boots up, the interior entrypoint script (`start.sh`) processes the following sequential logic parameters:
 
-```bash
-sudo docker compose up -d
-```
+1.  **Configuration Migration:** Scans for customized parameter configurations (`custom-php.ini`, `custom-opcache.ini`, `custom-www-php-fpm.conf`) and injects them safely across their spec directories.
+2.  **Code Presence Verification:** Checks for `/var/www/html/public/index.php`. If it exists, it skips installation and clears application cache files. If it is missing, it executes automated non-interactive Composer scripts (`--no-interaction --prefer-dist`) to download the `symfony/skeleton` application layer core, pulls the `webapp` profile, and downloads the `youtube-dl-php` framework dependencies automatically.
+3.  **Dynamic Certificate Mapping:** Scans `/etc/ssl/nginx`. If any valid private key and certificate pair match are found, it generates local tracking symbolic links (`server.crt` and `server.key`) dynamically.
+4.  **Security Handoff:** Calibrates directory permissions across project structures cleanly to `www-data` and transparently swaps process tracking control over to Supervisor to enforce **PID 1 compliance**.
 
->[!NOTE]
-> This command will build the Docker image and run a container.
+---
 
-___
+## 📝 Production Notes
+
+*   **Production Opcache Tuning:** The default `custom-opcache.ini` establishes `opcache.validate_timestamps=0`. This locks compiled code into memory permanently for extreme speed. Remember that new code updates require a total container restart or pod rollout to flush the memory pool.
+*   **Kubernetes Isolation Strategy:** In production cluster topologies, strip out port 443 listeners and volume-mapped SSL files entirely. Let your **Kubernetes Ingress Controller** (coupled alongside `cert-manager` for Automated Let's Encrypt handling) decrypt and terminate SSL traffic natively at the cluster boundary, passing standard HTTP traffic on Port 80 down to your pods.
+
+---
 
 # 🌐 Usage
 
 After running the container, access your application in your browser:
 
 ```
-https://localhost:8043
+https://localhost:8443
 ```
 
-You should see your index page rendered by the docker-symfony container.
+You should see your index page rendered by the `docker-symfony's nginx server`.
 
 <div align="center" width="100%">
-    <img width="100%" height="auto" alt="preview" src="https://github.com/user-attachments/assets/ebcbc084-6769-4a7a-865d-e4f2d8df1ab1" />
+  <img width="100%" height="auto" alt="Home Page Screenshot" src="https://github.com/user-attachments/assets/3c2c8de8-3c72-4a75-b7a6-393fe40c4cb3" />
+
 </div>
 
 <br/>
 
 >[!NOTE]
-> No need to start the `Symfony server` to access your project.
+> No need to start `Any web server` to access your project.
 
 ___
 
-# 📝 Notes
-
-* By default, Symfony SSL is used just in development; never use it in production.
-* For more security propose or in production mode:
-  * Put your project under a Reverse Proxy, you can use [Nginx Proxy Manager](https://nginxproxymanager.com/guide/),
-  * Or change the SSL source in the `-v /path/to/html/nginx/8008` to make Nginx use your own SSL.
-* Your project URLs: `http://xx.xx.xx.xx:8008` (`No Symfony ssl`) or `https://xx.xx.xx.xx:8043` (`With Symfony ssl`).
-* Set `enable_native_lazy_objects: true` in `'%kernel.project_dir%/config/packages/doctrine.yaml'` to avoid this error: `Since doctrine/doctrine-bundle 2.16: Not setting "doctrine.orm.enable_native_lazy_objects" to true is deprecated.`
-
-# 🤝 Contributing
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Make your changes.
-4. Commit your changes (`git commit -m "Add your feature"`).
-5. Push to the branch (`git push origin feature/your-feature`).
-6. Open a pull request.
-
-___
-
-# 📄 License
-
-This project is licensed under the [GPL-3.0 License](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE). See the [LICENSE](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE) file for details.
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE)
-
-___
-
-# 🔎 Acknowledgments
-
-* [PHP:fpm-alpine](https://hub.docker.com/layers/library/php/fpm-alpine/images/sha256-fcc2fccfa511b898a78e97e8a978fa41d54242dd54b729f9f9b76ef1398a75ed?context=explore)
-* [Alpine Linux docker base image](https://hub.docker.com/_/alpine)
-* [Symfony community](https://symfony.com/community)
-
-___
 
 # 🎯 Versions
 
-* __[v3.0.9] - 10/06/2025__: Add `youtube-dl ffmpeg x264-libs` packages.
-* __[v3.0.0] - 09/28/2025__: Add the user and group `www-data` and grant them permission `775`. Add the `exif` (Exchangeable image information) extension.
-* __[v2.1.0] - 09/16/2025__: Add the `PHP-OPcache` extension and configure the upload file size.
-* __[v2.0.9] - 08/31/2025__: Combine all in one Docker Image.
-* __[v1.0.0] - 08/09/2025__: Intial Release.
+* __[v4.0.0] : 08/30/2026__
+* __[v3.0.9] : 10/06/2025__
+* __[v3.0.0] : 09/28/2025__
+* __[v2.1.0] : 09/16/2025__
+* __[v2.0.9] : 08/31/2025__
+* __[v1.0.0] : 08/09/2025__
+___
+
+## 📄 License ~ [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE)
+
+This project is licensed under the terms of the [GPL-3.0 License](https://github.com/kprimecity/docker-symfony/blob/main/LICENSE). Created and maintained by [kprimecity](https://github.com/kprimecity).
+
 ___
 
 Take care! 💖 
