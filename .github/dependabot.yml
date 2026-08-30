@@ -1,24 +1,17 @@
 version: 2
 updates:
-  # 1. Track GitHub Actions core dependencies (Wakes up weekly)
+  # 1. Track GitHub Actions Core Dependencies (Grouped to avoid PR spam)
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     groups:
-      # Safely bundles all minor/patch action updates into a single collective PR
       github-actions-dependencies:
         patterns:
           - "*"
 
-  # 2. Track Symfony / Composer dependencies inside your code layer
+  # 2. Track Symfony / Composer Dependencies (Letting them evaluate naturally)
   - package-ecosystem: "composer"
-    # FIXED: Set to relative directory path "src" matching the layout context
     directory: "src"
     schedule:
       interval: "weekly"
-    groups:
-      # Optional: Bundles your Symfony composer updates together cleanly too!
-      php-dependencies:
-        patterns:
-          - "*"
