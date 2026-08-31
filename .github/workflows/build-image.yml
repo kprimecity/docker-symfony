@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - master
+    tags:
+      - 'v*.*.*'
     paths-ignore:
       - 'README.md'
       - 'SECURITY.md'
@@ -45,7 +47,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
-      # Log in to GitHub Container Registry (GHCR)
       - name: Log in to GHCR
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v4
@@ -54,7 +55,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Log in to Docker Hub using your secure Repository Secrets
       - name: Log in to Docker Hub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v4
@@ -63,7 +63,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Extract Docker metadata for BOTH registries simultaneously
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v6
@@ -71,10 +70,10 @@ jobs:
           images: |
             ghcr.io/${{ env.IMAGE_NAME }}
             docker.io/${{ secrets.DOCKERHUB_USERNAME }}/docker-symfony
+          # FIXED: Strictly enforces ONLY the exact version tag and latest tag
           tags: |
-            type=ref,event=branch
-            type=sha,format=short
-            type=raw,value=latest
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v') }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
