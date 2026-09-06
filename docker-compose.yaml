@@ -84,7 +84,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin_secure_pass   # UI Login Password
     ports:
       - "5050:80"    # Access pgAdmin locally via http://localhost:5050
-    # Add this healthcheck section:
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
     healthcheck:
       # Use wget to quietly check if the internal web port (80) responds with a valid status
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/misc/ping"]
@@ -98,6 +99,7 @@ services:
       - docker-symfony-network
 
 volumes:
+  pgadmin_data:
   postgres_data:
   redis_data:
 
