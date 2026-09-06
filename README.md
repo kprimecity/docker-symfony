@@ -63,6 +63,13 @@ services:
       - /path/to/project/nginx/ssl:/etc/ssl/nginx  # Mount custom SSL certificate pair folders
       - /path/to/project/nginx:/etc/nginx/http.d   # Mount Virtual Host configuration blocks
       - /path/to/project/html:/var/www/html        # Mount the Symfony framework source files
+    healthcheck:
+      # Test loops a curl request to the local server inside the container
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     networks:
       - docker-symfony-network
 
