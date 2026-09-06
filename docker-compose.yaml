@@ -26,6 +26,13 @@ services:
         condition: service_healthy
       redis-cache:
         condition: service_healthy
+    healthcheck:
+      # Test loops a curl request to the local server inside the container
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     networks:
       - docker-symfony-network
 
@@ -60,7 +67,7 @@ services:
       - redis_data:/data
     healthcheck:
       # Add the -a flag with password for redis-cli to ping healthcheck
-      test: ["CMD", "redis-cli", "-p", "6339", "-a", "redis_secure_pass", "ping"]
+      test: ["CMD-SHELL", "redis-cli", "-p", "6339", "-a", "redis_secure_pass", "ping"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -69,7 +76,7 @@ services:
 
   # 🗄️ 4. Standalone pgAdmin Management UI Container
   pgadmin-ui:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     container_name: pgadmin_management_web
     restart: always
     environment:
@@ -77,6 +84,14 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin_secure_pass   # UI Login Password
     ports:
       - "5050:80"    # Access pgAdmin locally via http://localhost:5050
+    # Add this healthcheck section:
+    healthcheck:
+      # Use wget to quietly check if the internal web port (80) responds with a valid status
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/misc/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
       - postgres-db
     networks:
