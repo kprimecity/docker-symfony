@@ -10,6 +10,7 @@ services:
       - "8008:80"   # http://localhost:8008
       - "8443:443"  # Optional: Using default Symfony certs. Drop your certs files in: /etc/ssl/nginx/ | Nginx ssl config: /etc/nginx/http.d/default.conf or use a reverse proxy
     volumes:
+      - /path/to/project/php:/usr/local/etc/php/conf.d  # Mount PHP ini and opcache custom files.
       - /path/to/project/nginx/ssl:/etc/ssl/nginx  # Mount SSL files. Note! All files will be renamed (e.g: server.key and server.crt).
       - /path/to/project/nginx:/etc/nginx/http.d  # Mount Nginx config
       - /path/to/project/html:/var/www/html            # Mount the Symfony html content
