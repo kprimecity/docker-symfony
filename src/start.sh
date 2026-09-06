@@ -48,10 +48,8 @@ if [ -f "$INDEX_FILE_PATH" ]; then
     echo "Your index file is located at: '$INDEX_FILE_PATH'."
 else
     cd /var/www/html
-    echo "Deleting html folder contents to prevent any file conflict."
-    rm -rf ./*
-
     echo "Downloading Symfony framework..."
+    
     COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton .  --no-interaction
     COMPOSER_ALLOW_SUPERUSER=1 composer require webapp --no-interaction --prefer-dist
     COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
