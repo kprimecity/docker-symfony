@@ -24,7 +24,7 @@ RUN apk upgrade --no-cache && \
     apk add --no-cache \
     nano curl git bash nginx \
     supervisor openssl python3 py3-pip \
-    youtube-dl ffmpeg x264-libs
+    yt-dlp ffmpeg x264-libs
 
 # 2. Grab the official high-performance PHP extension helper binary
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
