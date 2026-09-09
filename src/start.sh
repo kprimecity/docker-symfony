@@ -102,8 +102,9 @@ if [ -d "/var/www/html/var/cache" ]; then
     echo "🧹 Clearing old application cache..."
     
     cd /var/www/html
-    php bin/console cache:clear --no-interaction
-    php bin/console cache:warmup --no-interaction
+    # Run the console commands specifically as the www-data user
+    su -s /bin/bash www-data -c "php bin/console cache:clear --no-interaction"
+    su -s /bin/bash www-data -c "php bin/console cache:warmup --no-interaction"
 fi
 
 echo "🔒 Adjusting file permissions..."
