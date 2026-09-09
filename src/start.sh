@@ -10,7 +10,7 @@ WWW_PHP_FPM="custom-www-php-fpm.conf"
 NGINX_CONF="nginx.conf"
 DEFAULT_CONF="default.conf"
 SSL_DIR="/etc/ssl/nginx"
-INDEX_FILE_PATH="/var/www/html/public/index.php"
+# INDEX_FILE_PATH="/var/www/html/public/index.php"
 
 # Move the php ini file...
 if [ -f "/$PHP_INI" ]; then
@@ -43,22 +43,22 @@ if [ -f "/$DEFAULT_CONF" ]; then
     echo "Your Nginx Server config file is located at: '/etc/nginx/http.d/$DEFAULT_CONF'."
 fi
 
-# Download Symfony if not exist
-if [ -f "$INDEX_FILE_PATH" ]; then
-    echo "Your index file is located at: '$INDEX_FILE_PATH'."
-else
-    cd /var/www/html
-    echo "Downloading Symfony framework..."
+# # Download Symfony if not exist
+# if [ -f "$INDEX_FILE_PATH" ]; then
+#     echo "Your index file is located at: '$INDEX_FILE_PATH'."
+# else
+#     cd /var/www/html
+#     echo "Downloading Symfony framework..."
     
-    COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton .  --no-interaction
-    COMPOSER_ALLOW_SUPERUSER=1 composer require webapp --no-interaction --prefer-dist
-    COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
+#     COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton .  --no-interaction
+#     COMPOSER_ALLOW_SUPERUSER=1 composer require webapp --no-interaction --prefer-dist
+#     COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
 
-    echo "Installing dependencies..."
-    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist
-    COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-interaction --classmap-authoritative
-    COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist
-fi
+#     echo "Installing dependencies..."
+#     COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist
+#     COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-interaction --classmap-authoritative
+#     COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist
+# fi
 
 # Ensure the destination folder exists before any files are processed
 mkdir -p "$SSL_DIR"
