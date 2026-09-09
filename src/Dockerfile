@@ -64,6 +64,8 @@ RUN chmod +x /start.sh
 WORKDIR /var/www/html
 ARG COMPOSER_ALLOW_SUPERUSER=1
 ARG INDEX_FILE_PATH="/var/www/html/public/index.php"
+ENV REDIS_URL=redis://127.0.0.1:6379
+ENV DATABASE_URL=mysql://null:null@127.0.0.1:3306/null
 
 # Download Symfony if not exist
 RUN if [ -f "$INDEX_FILE_PATH" ]; then \
