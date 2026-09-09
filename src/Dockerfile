@@ -79,12 +79,6 @@ RUN chmod -R 775 /var/www
 # Download Symfony if not exist, Clear and warm up the cache for the specific environment
 RUN if [ -f "$INDEX_FILE_PATH" ]; then \
             echo "Your index file is located at: '$INDEX_FILE_PATH'."; \
-            if [ -d "/var/www/html/var/cache" ]; then \
-                echo "🧹 Clearing old application cache..." && \
-                cd /var/www/html && \
-                php bin/console cache:clear --no-interaction && \
-                php bin/console cache:warmup --no-interaction && \
-            fi \
       else \
             cd /var/www/html && \
             echo "Downloading Symfony framework..." && \
