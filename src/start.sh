@@ -101,10 +101,15 @@ fi
 if [ -d "/var/www/html/var/cache" ]; then
     echo "🧹 Clearing old application cache..."
     
+    # 1. Navigate to your project root folder
     cd /var/www/html
-    # Run the console commands specifically as the www-data user
-    su -s /bin/bash www-data -c "php bin/console cache:clear --no-interaction"
-    su -s /bin/bash www-data -c "php bin/console cache:warmup --no-interaction"
+
+    # 2. Run cache commands as 'www-data' user with inline env variables
+    su -s /bin/bash www-data -c "DATABASE_URL=mysql://null:null@127.0.0.1:3306/null REDIS_URL=redis://127.0.0.1:6379 php bin/console cache:clear --no-interaction"
+    su -s /bin/bash www-data -c "DATABASE_URL=mysql://null:null@127.0.0.1:3306/null REDIS_URL=redis://127.0.0.1:6379 php bin/console cache:warmup --no-interaction"
+
+    # 3. Double-check cache ownership permissions to avoid any future crashes
+    chown -R www-data:www-data /var/www/html/var/cache 2>/dev/null || true
 fi
 
 echo "🔒 Adjusting file permissions..."
