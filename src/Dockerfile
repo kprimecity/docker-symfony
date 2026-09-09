@@ -17,8 +17,6 @@ LABEL org.opencontainers.image.maintainer="kprimecity" \
       com.docker.extension.publisher.url="https://github.com/kprimecity/docker-symfony" \
       org.opencontainers.image.source="https://github.com/kprimecity/docker-symfony" 
 
-WORKDIR /var/www/html
-
 # 1. Install runtime utilities, system tools, media engines, and server layers
 RUN apk upgrade --no-cache && \
     apk add --no-cache \
@@ -62,9 +60,28 @@ RUN rm -f /usr/share/nginx/http-default_server.conf
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Expose server entry ports
-EXPOSE 80
-EXPOSE 443
+# Environment Configurations
+WORKDIR /var/www/html
+ARG COMPOSER_ALLOW_SUPERUSER=1
+ARG INDEX_FILE_PATH="/var/www/html/public/index.php"
+
+# Download Symfony if not exist
+RUN if [ -f "$INDEX_FILE_PATH" ]; then \
+          echo "Your index file is located at: '$INDEX_FILE_PATH'." \
+      else \
+          cd /var/www/html \
+          echo "Downloading Symfony framework..." \
+          composer create-project symfony/skeleton .  --no-interaction \
+          composer require webapp --no-interaction --prefer-dist \
+          composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist \
+          echo "Installing dependencies..." \
+          composer install --no-interaction --prefer-dist \
+          composer dump-autoload --no-interaction --classmap-authoritative \
+          composer update --no-interaction --prefer-dist \
+      fi
+
+# Expose HTTP and HTTPS ports
+EXPOSE 80 443
 
 ENTRYPOINT ["/start.sh"]
 
