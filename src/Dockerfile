@@ -62,36 +62,7 @@ RUN rm -f /usr/share/nginx/http-default_server.conf
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Environment Configurations
-ENV APP_DEBUG=1
-ENV APP_ENV=dev
-ARG COMPOSER_ALLOW_SUPERUSER=1
-ENV REDIS_URL=redis://127.0.0.1:6379
-ENV DATABASE_URL=mysql://null:null@127.0.0.1:3306/null
-ARG INDEX_FILE_PATH="/var/www/html/public/index.php"
-
-# Fix internal Alpine Nginx temporary folder privileges for the new nginx user context
-RUN chown -R www-data:www-data /var/lib/nginx
-RUN chown -R www-data:www-data /var/log/nginx
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 775 /var/www
-
-# Download Symfony if not exist, Clear and warm up the cache for the specific environment
-RUN if [ -f "$INDEX_FILE_PATH" ]; then \
-            echo "Your index file is located at: '$INDEX_FILE_PATH'."; \
-      else \
-            cd /var/www/html && \
-            echo "Downloading Symfony framework..." && \
-            composer create-project symfony/skeleton .  --no-interaction && \
-            composer require webapp --no-interaction --prefer-dist && \
-            composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist && \
-            echo "Installing dependencies..." && \
-            composer install --no-interaction --prefer-dist && \
-            composer dump-autoload --no-interaction --classmap-authoritative && \
-            composer update --no-interaction --prefer-dist; \
-      fi
-
-# Expose HTTP and HTTPS ports
+# Expose server entry ports
 EXPOSE 80 443
 
 ENTRYPOINT ["/start.sh"]
