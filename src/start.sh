@@ -97,22 +97,6 @@ if [ -d "$SSL_DIR" ]; then
     fi
 fi
 
-# Clear and warm up the cache for the specific environment
-if [ -d "/var/www/html/var/cache" ]; then
-    echo "🧹 Clearing old application cache..."
-    
-    cd /var/www/html
-    php bin/console cache:clear --no-interaction
-    php bin/console cache:warmup --no-interaction
-fi
-
-echo "🔒 Adjusting file permissions..."
-chown -R www-data:www-data /var/www
-chmod -R 775 /var/www
-
-# Fix internal Alpine Nginx temporary folder privileges for the new nginx user context
-chown -R www-data:www-data /var/lib/nginx
-chown -R www-data:www-data /var/log/nginx
 
 echo "✅ Initialization complete. Handing over control to Supervisor..."
 
