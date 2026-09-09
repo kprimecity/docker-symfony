@@ -50,14 +50,14 @@ else
     cd /var/www/html
     echo "Downloading Symfony framework..."
     
-    COMPOSER_ALLOW_SUPERUSER=1 composer create-project symfony/skeleton .  --no-interaction
-    COMPOSER_ALLOW_SUPERUSER=1 composer require webapp --no-interaction --prefer-dist
-    COMPOSER_ALLOW_SUPERUSER=1 composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
+    composer create-project symfony/skeleton .  --no-interaction
+    composer require webapp --no-interaction --prefer-dist
+    composer require norkunas/youtube-dl-php:dev-master --no-interaction --prefer-dist
 
     echo "Installing dependencies..."
-    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist
-    COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-interaction --classmap-authoritative
-    COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist
+    composer install --no-interaction --prefer-dist
+    composer dump-autoload --no-interaction --classmap-authoritative
+    composer update --no-interaction --prefer-dist
 fi
 
 # Ensure the destination folder exists before any files are processed
