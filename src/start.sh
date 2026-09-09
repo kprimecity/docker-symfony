@@ -102,8 +102,8 @@ if [ -d "/var/www/html/var/cache" ]; then
     echo "🧹 Clearing old application cache..."
     
     cd /var/www/html
-    php bin/console cache:clear --no-interaction
-    php bin/console cache:warmup --no-interaction
+    php bin/console cache:clear --no-interaction 2>/dev/null || true
+    php bin/console cache:warmup --no-interaction 2>/dev/null || true
 fi
 
 echo "🔒 Adjusting file permissions..."
