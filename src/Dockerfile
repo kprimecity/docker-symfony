@@ -71,7 +71,7 @@ ENV DATABASE_URL=mysql://null:null@127.0.0.1:3306/null
 RUN if [ -f "$INDEX_FILE_PATH" ]; then \
           echo "Your index file is located at: '$INDEX_FILE_PATH'."; \
       else \
-          cd /var/www/html && \
+          # cd /var/www/html && \
           echo "Downloading Symfony framework..." && \
           composer create-project symfony/skeleton .  --no-interaction && \
           composer require webapp --no-interaction --prefer-dist && \
@@ -80,6 +80,20 @@ RUN if [ -f "$INDEX_FILE_PATH" ]; then \
           composer install --no-interaction --prefer-dist && \
           composer dump-autoload --no-interaction --classmap-authoritative && \
           composer update --no-interaction --prefer-dist; \
+      fi
+
+# Fix internal Alpine Nginx temporary folder privileges for the new nginx user context
+RUN chown -R www-data:www-data /var/lib/nginx
+RUN chown -R www-data:www-data /var/log/nginx
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 775 /var/www
+
+# Clear and warm up the cache for the specific environment
+RUN if [ -d "/var/www/html/var/cache" ]; then \
+          echo "🧹 Clearing old application cache..." && \
+          # cd /var/www/html && \
+          php bin/console cache:clear --no-interaction && \
+          php bin/console cache:warmup --no-interaction; \
       fi
 
 # Expose HTTP and HTTPS ports
