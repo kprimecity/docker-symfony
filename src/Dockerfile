@@ -21,7 +21,7 @@ WORKDIR /var/www/html
 
 # 1. Install runtime utilities, system tools, media engines, and server layers
 RUN apk upgrade --no-cache && \
-    apk add --no-cache docker-cli \
+    apk add --no-cache \
     nano curl git bash nginx \
     supervisor openssl python3 py3-pip \
     yt-dlp ffmpeg x264-libs
