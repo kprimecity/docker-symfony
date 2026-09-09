@@ -83,8 +83,8 @@ RUN if [ -f "$INDEX_FILE_PATH" ]; then \
                 echo "🧹 Clearing old application cache..." && \
                 cd /var/www/html && \
                 php bin/console cache:clear --no-interaction && \
-                php bin/console cache:warmup --no-interaction; \
-            fi
+                php bin/console cache:warmup --no-interaction && \
+            fi \
       else \
             cd /var/www/html && \
             echo "Downloading Symfony framework..." && \
