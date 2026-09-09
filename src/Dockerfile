@@ -65,6 +65,13 @@ RUN chmod +x /start.sh
 # Expose server entry ports
 EXPOSE 80 443
 
+# Environment Configurations
+ENV APP_DEBUG=1
+ENV APP_ENV=dev
+ARG COMPOSER_ALLOW_SUPERUSER=1
+ENV REDIS_URL=redis://127.0.0.1:6379
+ENV DATABASE_URL=mysql://null:null@127.0.0.1:3306/null
+
 ENTRYPOINT ["/start.sh"]
 
 # Start supervisor to coordinate both Nginx and PHP-FPM under native safety controls
