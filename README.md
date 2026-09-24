@@ -104,6 +104,13 @@ services:
     environment:
       DATABASE_URL: "postgresql://symfony_user:secure_password@postgres-db:5432/symfony_db?serverVersion=16&charset=utf8"
       REDIS_URL: "redis://:redis_secure_pass@redis-cache:6339"
+    healthcheck:
+      # Test loops a curl request to the local server inside the container
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -142,7 +149,7 @@ services:
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "-p", "6339", "ping"]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -151,7 +158,7 @@ services:
 
   # 🗄️ 4. Standalone pgAdmin Management UI Container
   pgadmin-ui:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:9.17
     container_name: pgadmin_management_web
     restart: always
     environment:
@@ -160,7 +167,14 @@ services:
     ports:
       - "5050:80"    # Access database administration center via http://localhost:5050
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy # ⏳ Force pgAdmin to wait until Postgres passes its healthcheck
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:80/misc/ping"] # 🔍 Probes pgAdmin's internal status endpoint
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
     networks:
       - docker-symfony-network
 
